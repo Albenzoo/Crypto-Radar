@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projectwallet/constants.dart';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -22,6 +21,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
 
@@ -34,43 +34,69 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-       body: Container(
-         width: size.width,
-         height: size.height,
-         child: Stack(
-           children: [
-             Row(
-               children: [
-                 Container(
-                   height: double.infinity,
-                   width: size.width / 2,
-                   color: kPrimaryColor,
-                 ),
-                 Container(
-                   height: double.infinity,
-                   width: size.width / 2,
-                   color: Colors.white,
-                 )
-               ],
-             ),
-
-             Align(
-               alignment: Alignment.topLeft,
-               child: Padding(
-                 padding: EdgeInsets.all(32),
-                 child: Text(
-                   "Welcome",
-                   style: TextStyle(
-                     color: Colors.white,
-                     fontSize: 24,
-                     fontWeight: FontWeight.bold,
-                   ),
-                 ),
-                 ),
-             )
-           ],
-         ),
-       ),
+      body: Container(
+        width: size.width,
+        height: size.height,
+        child: Stack(
+          children: [
+            Row(
+              children: [
+                Container(
+                  height: double.infinity,
+                  width: size.width / 2,
+                  color: kPrimaryColor,
+                ),
+                Container(
+                  height: double.infinity,
+                  width: size.width / 2,
+                  color: Colors.white,
+                )
+              ],
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: EdgeInsets.all(32),
+                child: Text(
+                  "Welcome",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.all(32),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "primo tsto",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "secondo",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 28,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
