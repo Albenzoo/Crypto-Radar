@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projectwallet/constants.dart';
+import 'package:projectwallet/login.dart';
 
 void main() {
   runApp(MyApp());
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
               child: Padding(
                 padding: EdgeInsets.all(32),
                 child: Text(
-                  "Welcome",
+                  "Benvenuto",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
@@ -76,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "primo tsto",
+                      "Controlla le tue crypto!",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 28,
@@ -84,15 +85,18 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Text(
-                      "secondo",
+                      "Inserisci i dati e visualizza le statistiche",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 28,
+                        fontSize: 15,
                       ),
                     ),
                   ],
                 ),
               ),
+            ),
+            Container(
+              child: LogIn(),
             )
           ],
         ),
