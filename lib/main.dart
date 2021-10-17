@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                 Container(
                   height: double.infinity,
                   width: size.width / 2,
-                  color: Colors.white,
+                  color: kSecondaryColor,
                 )
               ],
             ),

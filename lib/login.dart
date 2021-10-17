@@ -87,24 +87,9 @@ class _LogInState extends State<LogIn> {
                       SizedBox(
                         height: 64,
                       ),
-                      actionButton("Log In"),
+                      actionButton(context, "Log In"),
                       SizedBox(
                         height: 32,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "You do not have an account?",
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 14,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                        ],
                       ),
                     ],
                   ),
