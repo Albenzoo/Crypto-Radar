@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projectwallet/action_button.dart';
-import 'package:projectwallet/constants.dart';
+import 'package:projectwallet/shared/constants.dart';
 
 class LogIn extends StatefulWidget {
   @override
