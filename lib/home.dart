@@ -30,17 +30,26 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    fetchCoin();
+    //fetchCoin();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      "Home",
-      style: TextStyle(
-        fontSize: 18,
-        color: Colors.grey[700],
+    return Scaffold(
+      appBar: AppBar(
+        leading: Icon(
+          Icons.savings,
+        ),
+        title: Text('Crypto wallet'),
+        actions: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Icon(Icons.autorenew),
+          ),
+        ],
+        backgroundColor: kPrimaryColor,
       ),
+      body: Container(),
     );
   }
 }
