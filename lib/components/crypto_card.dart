@@ -10,7 +10,7 @@ Widget cryptoCard(BuildContext myContext, CryptoMarket crypto) {
     children: [
       Text(crypto.name, style: TextStyle(fontSize: 24)),
       const SizedBox(height: 12),
-      Text("altre info",
+      Text(crypto.currentPrice.toString() + "€",
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
     ],
   ));
