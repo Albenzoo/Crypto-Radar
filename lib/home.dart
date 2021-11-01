@@ -13,10 +13,10 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
-  void initState() {
-    /* super.initState();
-    CryptoApi.fetchCoin(); */
-  }
+  /* void initState() {
+    super.initState();
+    CryptoApi.fetchCoin();
+  } */
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +37,6 @@ class _HomeState extends State<Home> {
       body: FutureBuilder<List<CryptoMarket>>(
         future: CryptoApi.fetchCoin(),
         builder: (context, snapshot) {
-          final List<CryptoMarket>? cryptoList = snapshot.data;
-
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
               return Center(child: CircularProgressIndicator());
@@ -46,6 +44,8 @@ class _HomeState extends State<Home> {
               if (snapshot.hasError) {
                 return Center(child: Text('Some error occurred!'));
               } else {
+                final List<CryptoMarket> cryptoList = snapshot.data!;
+
                 return buildCryptoGrid(cryptoList);
               }
           }
@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget buildCryptoGrid(List<CryptoMarket>? criptoList) => Padding(
+  Widget buildCryptoGrid(List<CryptoMarket> cryptoList) => Padding(
       padding: EdgeInsets.all(8.0),
       child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -62,8 +62,8 @@ class _HomeState extends State<Home> {
               childAspectRatio: 3 / 2,
               crossAxisSpacing: 20,
               mainAxisSpacing: 20),
-          itemCount: 10,
+          itemCount: cryptoList.length,
           itemBuilder: (BuildContext ctx, index) {
-            return cryptoCard(context, "dd");
+            return cryptoCard(context, cryptoList[index]);
           }));
 }
