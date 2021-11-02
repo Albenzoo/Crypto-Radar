@@ -5,13 +5,17 @@ import 'package:projectwallet/home.dart';
 
 Widget cryptoCard(BuildContext myContext, CryptoMarket crypto) {
   return Card(
-      child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(crypto.name, style: TextStyle(fontSize: 24)),
-      const SizedBox(height: 12),
-      Text(crypto.currentPrice.toString() + "€",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-    ],
-  ));
+    child: Padding(
+        padding: EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(crypto.name + " (${crypto.symbol.toUpperCase()})",
+                style: TextStyle(fontSize: 18)),
+            const SizedBox(height: 8),
+            Text(crypto.currentPrice.toString() + "€",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          ],
+        )),
+  );
 }
