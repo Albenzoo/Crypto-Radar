@@ -5,6 +5,7 @@ import 'package:projectwallet/home.dart';
 
 Widget cryptoCard(BuildContext myContext, CryptoMarket crypto) {
   return Card(
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
     child: Padding(
         padding: EdgeInsets.all(12),
         child: Column(
