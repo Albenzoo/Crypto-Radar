@@ -21,37 +21,39 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Icon(
-          Icons.savings,
-        ),
-        title: Text('Crypto wallet'),
-        actions: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Icon(Icons.autorenew),
+        appBar: AppBar(
+          leading: Icon(
+            Icons.radar,
           ),
-        ],
-        backgroundColor: kPrimaryColor,
-      ),
-      body: FutureBuilder<List<CryptoMarket>>(
-        future: CryptoApi.fetchCoin(),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return Center(child: CircularProgressIndicator());
-            default:
-              if (snapshot.hasError) {
-                return Center(child: Text('Some error occurred!'));
-              } else {
-                final List<CryptoMarket> cryptoList = snapshot.data!;
+          title: Text('Crypto Radar'),
+          actions: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Icon(Icons.autorenew),
+            ),
+          ],
+          backgroundColor: kPrimaryColor,
+        ),
+        body: Container(
+          color: kSecondaryColor,
+          child: FutureBuilder<List<CryptoMarket>>(
+            future: CryptoApi.fetchCoin(),
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return Center(child: CircularProgressIndicator());
+                default:
+                  if (snapshot.hasError) {
+                    return Center(child: Text('Some error occurred!'));
+                  } else {
+                    final List<CryptoMarket> cryptoList = snapshot.data!;
 
-                return buildCryptoGrid(cryptoList);
+                    return buildCryptoGrid(cryptoList);
+                  }
               }
-          }
-        },
-      ),
-    );
+            },
+          ),
+        ));
   }
 
   Widget buildCryptoGrid(List<CryptoMarket> cryptoList) => Padding(
@@ -64,6 +66,14 @@ class _HomeState extends State<Home> {
               mainAxisSpacing: 20),
           itemCount: cryptoList.length,
           itemBuilder: (BuildContext ctx, index) {
-            return cryptoCard(context, cryptoList[index]);
+            return MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                child: cryptoCard(context, cryptoList[index]),
+                onTap: () {
+                  print("clicked ${cryptoList[index].symbol}");
+                },
+              ),
+            );
           }));
 }
