@@ -76,6 +76,9 @@ class _LogInState extends State<LogIn> {
                         height: 32,
                       ),
                       TextField(
+                        obscureText: true,
+                        enableSuggestions: false,
+                        autocorrect: false,
                         decoration: InputDecoration(
                           hintText: 'Password',
                           labelText: 'Password',
