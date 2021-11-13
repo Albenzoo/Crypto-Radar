@@ -19,16 +19,34 @@ Widget cryptoCard(BuildContext myContext, CryptoMarket crypto) {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
+          color: Colors.blue,
           //color: kPrimaryColor,
         ),
         padding: EdgeInsets.all(12),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Ink.image(
-              height: 30,
-              width: 30,
-              image: NetworkImage(crypto.image),
+            Padding(
+              padding: const EdgeInsets.all(4),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.shade600,
+                        offset: Offset(2, 2),
+                        blurRadius: 10,
+                        spreadRadius: 2,
+                      )
+                    ]),
+                height: 50,
+                width: 50,
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Image.network(crypto.image),
+                ),
+              ),
             ),
             Text(crypto.name + " (${crypto.symbol.toUpperCase()})",
                 style: TextStyle(fontSize: 18)),
