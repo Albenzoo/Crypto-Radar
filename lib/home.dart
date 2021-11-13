@@ -60,8 +60,8 @@ class _HomeState extends State<Home> {
       padding: EdgeInsets.all(8.0),
       child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
-              childAspectRatio: 3 / 2,
+              maxCrossAxisExtent: 350,
+              childAspectRatio: 4 / 2,
               crossAxisSpacing: 20,
               mainAxisSpacing: 20),
           itemCount: cryptoList.length,
