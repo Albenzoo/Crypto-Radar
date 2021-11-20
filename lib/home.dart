@@ -71,7 +71,7 @@ class _HomeState extends State<Home> {
               child: GestureDetector(
                 child: cryptoCard(context, cryptoList[index]),
                 onTap: () {
-                  print("clicked ${cryptoList[index].symbol}");
+                  print("clicked ${cryptoList[index].symbol.toUpperCase()}");
                 },
               ),
             );
