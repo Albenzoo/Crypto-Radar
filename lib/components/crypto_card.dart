@@ -76,10 +76,46 @@ Widget cryptoCard(BuildContext myContext, CryptoMarket crypto) {
                           Text(crypto.symbol.toUpperCase(),
                               style: TextStyle(
                                   fontSize: 18, color: Colors.grey.shade800)),
+                          Chip(
+                            backgroundColor: isCryptoPositive(
+                                    crypto.priceChangePercentage24h!)
+                                ? chipColorPositive
+                                : chipColorNegative,
+                            avatar: CircleAvatar(
+                              backgroundColor: isCryptoPositive(
+                                      crypto.priceChangePercentage24h!)
+                                  ? chipColorPositive
+                                  : chipColorNegative,
+                              child: Icon(
+                                isCryptoPositive(
+                                        crypto.priceChangePercentage24h!)
+                                    ? Icons.add_circle
+                                    : Icons.remove_circle,
+                                color: isCryptoPositive(
+                                        crypto.priceChangePercentage24h!)
+                                    ? Colors.green
+                                    : Colors.red,
+                                size: 20.0,
+                              ),
+                            ),
+                            label: Text(
+                                "${getPriceChangePercentage24Label(crypto.priceChangePercentage24h!)}%"),
+                          ),
                         ])
                   ]),
             ),
           ),
         ])),
   );
+}
+
+/* Return the value without the minus*/
+String getPriceChangePercentage24Label(double crypto24percentage) {
+  return crypto24percentage > 0
+      ? crypto24percentage.toString()
+      : crypto24percentage.toString().substring(1);
+}
+
+bool isCryptoPositive(double crypto24percentage) {
+  return crypto24percentage > 0 ? true : false;
 }
