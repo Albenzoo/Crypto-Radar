@@ -12,7 +12,6 @@ nodemon mocks/
 
 Lista:
 
-- gestire meglio la chip delle card, fare una funzione che ritorna il widget intero
 - correggere errore "indietro" dalla home alla login
 - fare per bene le card della home
 - inserire spinner loading

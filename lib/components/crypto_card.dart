@@ -58,15 +58,16 @@ Widget cryptoCard(BuildContext myContext, CryptoMarket crypto) {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(crypto.name, style: TextStyle(fontSize: 18)),
-                        Text(
-                            crypto.currentPrice
-                                    .toString()
-                                    .replaceAll(".", ",") +
-                                "€",
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight
-                                    .bold)), /* const SizedBox(height: 8), */
+                        Padding(
+                            padding: const EdgeInsets.only(right: 6),
+                            child: Text(
+                                crypto.currentPrice
+                                        .toString()
+                                        .replaceAll(".", ",") +
+                                    "€",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold))),
                       ],
                     ),
                     Row(
@@ -76,31 +77,7 @@ Widget cryptoCard(BuildContext myContext, CryptoMarket crypto) {
                           Text(crypto.symbol.toUpperCase(),
                               style: TextStyle(
                                   fontSize: 18, color: Colors.grey.shade800)),
-                          Chip(
-                            backgroundColor: isCryptoPositive(
-                                    crypto.priceChangePercentage24h!)
-                                ? chipColorPositive
-                                : chipColorNegative,
-                            avatar: CircleAvatar(
-                              backgroundColor: isCryptoPositive(
-                                      crypto.priceChangePercentage24h!)
-                                  ? chipColorPositive
-                                  : chipColorNegative,
-                              child: Icon(
-                                isCryptoPositive(
-                                        crypto.priceChangePercentage24h!)
-                                    ? Icons.add_circle
-                                    : Icons.remove_circle,
-                                color: isCryptoPositive(
-                                        crypto.priceChangePercentage24h!)
-                                    ? Colors.green
-                                    : Colors.red,
-                                size: 20.0,
-                              ),
-                            ),
-                            label: Text(
-                                "${getPriceChangePercentage24Label(crypto.priceChangePercentage24h!)}%"),
-                          ),
+                          createPercentageChip(crypto.priceChangePercentage24h),
                         ])
                   ]),
             ),
@@ -109,13 +86,71 @@ Widget cryptoCard(BuildContext myContext, CryptoMarket crypto) {
   );
 }
 
-/* Return the value without the minus*/
-String getPriceChangePercentage24Label(double crypto24percentage) {
-  return crypto24percentage > 0
-      ? crypto24percentage.toString()
-      : crypto24percentage.toString().substring(1);
+/* create the Chip based on the given percentage */
+Chip createPercentageChip(double? crypto24percentage) {
+  if (crypto24percentage == null) {
+    return Chip(label: Text("NaN"), backgroundColor: Colors.grey);
+  }
+  String cryptoMovement = getCryptoMovement(crypto24percentage);
+  String percentageLabel =
+      "${getPriceChangePercentage24Label(crypto24percentage)}%";
+  switch (cryptoMovement) {
+    case "positive":
+      return Chip(
+        label: Text(percentageLabel),
+        backgroundColor: chipColorPositive,
+        avatar: CircleAvatar(
+          backgroundColor: chipColorPositive,
+          child: Icon(
+            Icons.add_circle,
+            color: Colors.green,
+            size: 20.0,
+          ),
+        ),
+      );
+    case "negative":
+      return Chip(
+        label: Text(percentageLabel),
+        backgroundColor: chipColorNegative,
+        avatar: CircleAvatar(
+          backgroundColor: chipColorNegative,
+          child: Icon(
+            Icons.remove_circle,
+            color: Colors.red,
+            size: 20.0,
+          ),
+        ),
+      );
+    default:
+      return Chip(
+        label: Text("0%"),
+        backgroundColor: chipColorNeutral,
+        avatar: CircleAvatar(
+          backgroundColor: chipColorNeutral,
+          child: Icon(
+            Icons.drag_handle,
+            color: Colors.grey.shade800,
+            size: 20.0,
+          ),
+        ),
+      );
+  }
 }
 
-bool isCryptoPositive(double crypto24percentage) {
-  return crypto24percentage > 0 ? true : false;
+/* Return the value without the minus and cutted*/
+String getPriceChangePercentage24Label(double crypto24percentage) {
+  return crypto24percentage > 0
+      ? crypto24percentage.toStringAsFixed(2)
+      : crypto24percentage.toStringAsFixed(2).substring(1);
+}
+
+/* Return the string trend of the crypto */
+String getCryptoMovement(double crypto24percentage) {
+  if (crypto24percentage == 0) {
+    return "neutral";
+  } else if (crypto24percentage > 0) {
+    return "positive";
+  } else {
+    return "negative";
+  }
 }
