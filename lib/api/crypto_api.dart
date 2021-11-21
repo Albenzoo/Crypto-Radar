@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:projectwallet/models/CryptoMarket.dart';
+import 'package:projectwallet/models/LoginModel.dart';
 import 'package:projectwallet/shared/constants.dart';
 import 'dart:convert';
 
@@ -18,6 +19,23 @@ class CryptoApi {
       // If the server did not return a 200 OK response,
       // then throw an exception.
       throw Exception('Failed to load crypto list');
+    }
+  }
+
+  static Future<LoginResponse> doLogin() async {
+    final response =
+        await http.get(Uri.parse("http://localhost:3001" + '/api/login'));
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      final body = jsonDecode(response.body);
+      print(LoginResponse.fromJson(body));
+
+      return LoginResponse.fromJson(body);
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to login');
     }
   }
 }

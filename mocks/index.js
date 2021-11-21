@@ -21,68 +21,13 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get("/api/loginssodca", function (req, res) {
+app.get("/api/login", function (req, res) {
   setTimeout(function () {
     res.json({
       status: "OK",
-      tiid: "200000073975",
-      _sim: [
-        {
-          msisdn: "3433434343",
-          type: "",
-          ambito: "Mobile",
-        },
-      ],
-      sim: [
-        {
-          msisdn: "0773854999",
-          type: "",
-          ambito: "Fisso",
-        },
-        {
-          msisdn: "3312624058",
-          type: "PP",
-          ambito: "Mobile",
-        },
-        {
-          msisdn: "3312623474",
-          type: "PP",
-          ambito: "Mobile",
-        },
-        {
-          msisdn: "3312623171",
-          type: "PP",
-          ambito: "Mobile",
-        },
-        {
-          msisdn: "3312624332",
-          type: "PP",
-          ambito: "Mobile",
-        },
-        {
-          msisdn: "3312623052",
-          type: "PP",
-          ambito: "Mobile",
-        },
-        {
-          msisdn: "3312622781",
-          type: "PP",
-          ambito: "Mobile",
-        },
-        {
-          msisdn: "3312623389",
-          type: "PP",
-          ambito: "Mobile",
-        },
-        {
-          msisdn: "3312623665",
-          type: "PP",
-          ambito: "Mobile",
-        },
-      ],
-      access_token: "4bbffda1-87bb-4a0c-83c7-61c01b2371ab",
+      accessToken: "4bbffda1-87bb-4a0c-83c7-61c01b2371ab",
     });
-  }, 1000);
+  }, 5000);
 });
 
 app.get("/api/ordini/getOrderListByRif", (req, res) => {

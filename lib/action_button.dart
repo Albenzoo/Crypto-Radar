@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:projectwallet/models/LoginModel.dart';
 import 'package:projectwallet/shared/constants.dart';
 import 'package:projectwallet/home.dart';
+
+import 'api/crypto_api.dart';
 
 Widget actionButton(BuildContext myContext, String text) {
   return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
           onTap: () {
-            Navigator.push(
+            CryptoApi.doLogin().then((result) {
+              print('In Builder');
+              Navigator.push(
+                myContext,
+                MaterialPageRoute(builder: (context) => Home()),
+              );
+            });
+            print('bene');
+
+            /* Navigator.push(
               myContext,
               MaterialPageRoute(builder: (context) => Home()),
-            );
-            print("Go to home page!");
+            ); */
+            print("Cliccato!");
           },
           child: Container(
             height: 50,
