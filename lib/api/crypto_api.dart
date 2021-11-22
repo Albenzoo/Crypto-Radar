@@ -29,7 +29,7 @@ class CryptoApi {
       // If the server did return a 200 OK response,
       // then parse the JSON.
       final body = jsonDecode(response.body);
-      print(LoginResponse.fromJson(body));
+      print([body]);
 
       return LoginResponse.fromJson(body);
     } else {

@@ -1,8 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:projectwallet/action_button.dart';
 import 'package:projectwallet/shared/constants.dart';
+import 'package:projectwallet/home.dart';
+
+import 'api/crypto_api.dart';
 
 class LogIn extends StatefulWidget {
+  final Function() showLoading;
+  final Function() hideLoading;
+  LogIn({Key? key, required this.showLoading, required this.hideLoading})
+      : super(key: key);
   @override
   _LogInState createState() => _LogInState();
 }
@@ -90,7 +99,35 @@ class _LogInState extends State<LogIn> {
                       SizedBox(
                         height: 64,
                       ),
-                      actionButton(context, "Log In"),
+                      MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                            child: actionButton(context, "Log In"),
+                            onTap: () async {
+                              print("loggin in...");
+                              widget.showLoading();
+                              final response = await CryptoApi.doLogin();
+                              if (response.status != "OK") {
+                                throw Exception("error");
+                              } else {
+                                widget.hideLoading();
+                                navigateToSubPage();
+                              }
+                              /* if (response.status == "OK") { */
+                              /* widget.hideLoading(); */
+                              /* print([response]); */
+                              /* await Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => Home()),
+                              ); */
+
+                              /* CryptoApi.doLogin().then((result) {
+                                if (result.status == "OK") {
+                                  print("ok");
+                                }
+                              }); */
+                            }),
+                      ),
                       SizedBox(
                         height: 32,
                       ),
@@ -103,5 +140,9 @@ class _LogInState extends State<LogIn> {
         ),
       ),
     );
+  }
+
+  Future navigateToSubPage() async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
   }
 }

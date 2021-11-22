@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projectwallet/shared/constants.dart';
 import 'package:projectwallet/login.dart';
@@ -31,6 +32,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool _isLoading = false;
+
+  void _showLoading() {
+    setState(() {
+      _isLoading = true;
+    });
+  }
+
+  void _hideLoading() {
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -38,68 +53,71 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         width: size.width,
         height: size.height,
-        child: Stack(
-          children: [
-            Row(
-              children: [
-                Container(
-                  height: double.infinity,
-                  width: size.width / 2,
-                  color: kPrimaryColor,
-                ),
-                Container(
-                  height: double.infinity,
-                  width: size.width / 2,
-                  color: kSecondaryColor,
-                )
-              ],
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: EdgeInsets.all(32),
-                child: Text(
-                  "Benvenuto",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+        child: _isLoading
+            ? SpinKitRotatingCircle(color: Colors.red, size: 80.0)
+            : Stack(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        height: double.infinity,
+                        width: size.width / 2,
+                        color: kPrimaryColor,
+                      ),
+                      Container(
+                        height: double.infinity,
+                        width: size.width / 2,
+                        color: kSecondaryColor,
+                      )
+                    ],
                   ),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.all(32),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Controlla le tue crypto!",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Padding(
+                      padding: EdgeInsets.all(32),
+                      child: Text(
+                        "Benvenuto",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                    Text(
-                      "Inserisci i dati e visualizza le statistiche",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.all(32),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Controlla le tue crypto!",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            "Inserisci i dati e visualizza le statistiche",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  Container(
+                    child: LogIn(
+                        showLoading: _showLoading, hideLoading: _hideLoading),
+                  )
+                ],
               ),
-            ),
-            Container(
-              child: LogIn(),
-            )
-          ],
-        ),
       ),
     );
   }

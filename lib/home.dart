@@ -13,12 +13,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
-  /* void initState() {
-    super.initState();
-    CryptoApi.fetchCoin();
-  } */
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(

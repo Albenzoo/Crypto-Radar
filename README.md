@@ -3,7 +3,7 @@
 Per avviare il progetto:
 flutter run -d chrome --web-port 8080 --web-renderer html
 se va in errore provare ad impostare l'hostname (adattando il mock):
-flutter run -d chrome --web-port=8080 --web-hostname=127.0.0.1
+flutter run -d chrome --web-port=8080 --web-renderer html --web-hostname=127.0.0.1
 
 Per aggiornare la pagina cliccare "r" sul terminale
 
