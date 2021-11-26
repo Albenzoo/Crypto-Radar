@@ -1,17 +1,13 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:projectwallet/action_button.dart';
 import 'package:projectwallet/shared/constants.dart';
 import 'package:projectwallet/home.dart';
-
+import 'package:projectwallet/shared/loading/loading_provider.dart';
+import 'package:provider/provider.dart';
 import 'api/crypto_api.dart';
 
 class LogIn extends StatefulWidget {
-  final Function() showLoading;
-  final Function() hideLoading;
-  LogIn({Key? key, required this.showLoading, required this.hideLoading})
-      : super(key: key);
+  LogIn({Key? key}) : super(key: key);
   @override
   _LogInState createState() => _LogInState();
 }
@@ -105,27 +101,16 @@ class _LogInState extends State<LogIn> {
                             child: actionButton(context, "Log In"),
                             onTap: () async {
                               print("loggin in...");
-                              widget.showLoading();
+                              //show loading;
+                              context.read<LoadingProvider>().setLoad(true);
                               final response = await CryptoApi.doLogin();
                               if (response.status != "OK") {
                                 throw Exception("error");
                               } else {
-                                widget.hideLoading();
                                 navigateToSubPage();
+                                //hide loading;
+                                context.read<LoadingProvider>().setLoad(false);
                               }
-                              /* if (response.status == "OK") { */
-                              /* widget.hideLoading(); */
-                              /* print([response]); */
-                              /* await Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Home()),
-                              ); */
-
-                              /* CryptoApi.doLogin().then((result) {
-                                if (result.status == "OK") {
-                                  print("ok");
-                                }
-                              }); */
                             }),
                       ),
                       SizedBox(
