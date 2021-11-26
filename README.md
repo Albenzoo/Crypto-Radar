@@ -13,6 +13,5 @@ nodemon mocks/
 Lista:
 
 - correggere errore "indietro" dalla home alla login
-- fare per bene le card della home
-- inserire spinner loading
 - fare pagina dettaglio crypto
+- ritoccare dettagli card della home
