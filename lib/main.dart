@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projectwallet/shared/constants.dart';
-import 'package:projectwallet/login.dart';
+import 'package:projectwallet/pages/login.dart';
 import 'package:projectwallet/shared/loading/loading.dart';
 
 void main() {

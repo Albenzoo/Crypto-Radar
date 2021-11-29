@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projectwallet/models/LoginModel.dart';
 import 'package:projectwallet/shared/constants.dart';
-import 'package:projectwallet/home.dart';
-
-import 'api/crypto_api.dart';
 
 Widget actionButton(BuildContext myContext, String text) {
   return Container(
