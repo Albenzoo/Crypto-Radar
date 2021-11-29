@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class Detail extends StatefulWidget {
   final String coinSymbol;
 
-  Detail({Key? key, required this.coinSymbol}) : super(key: key);
+  Detail({required this.coinSymbol});
 
   @override
   _DetailState createState() => _DetailState();
@@ -20,8 +20,10 @@ class _DetailState extends State<Detail> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as Detail;
+
     return Container(
-      child: Text('s'),
+      child: Text(args.coinSymbol),
     );
   }
 }

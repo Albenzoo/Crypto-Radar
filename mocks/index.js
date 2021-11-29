@@ -27,52 +27,7 @@ app.get("/api/login", function (req, res) {
       status: "OK",
       accessToken: "4bbffda1-87bb-4a0c-83c7-61c01b2371ab",
     });
-  }, 5000);
-});
-
-app.get("/api/ordini/getOrderListByRif", (req, res) => {
-  console.log(" orders !!", req.query);
-  setTimeout(function () {
-    let ordersList = [
-      {
-        mainLavCom: {
-          numeroOrdine: "200000037407",
-          statoOrdine: "Completato", //Annullato, In Lavorazione , Sospeso
-          nomeOfferta: "TIM CONNECT Fibra",
-          dataOrdine: "2018-07-19T06:50:22",
-          dataPrevistaAtt: null,
-          canaleVendita: "WEB",
-          numeroLinea: "0773816421",
-          tipo: "main",
-          tipoLavCommerciale: "Attivazione",
-          lavCommerciale: "Attivazione fisso fibra (NIP)",
-        },
-        notMainLavCom: [
-          {
-            offerId: "Servizi OTT",
-            numeroLinea: "0",
-            statoOrdine: "Non consegnato",
-            tipo: "notMain",
-            desConsInterv: "il prodotto sara spedito tramite corriere",
-          },
-          {
-            offerId: "773371_RES_TIM HUB",
-            numeroLinea: "0",
-            statoOrdine: "Non consegnato",
-            tipo: "notMain",
-            desConsInterv: "il prodotto sara spedito tramite corriere",
-          },
-        ],
-      },
-    ];
-
-    //ordersList = [];
-
-    res /* .status(500) */
-      .json(ordersList);
-
-    //res.sendStatus(500);
-  }, 1200);
+  }, 2000);
 });
 
 app.get("/api/v3/coins/markets", function (req, res) {
@@ -667,7 +622,7 @@ app.get("/api/v3/coins/markets", function (req, res) {
         last_updated: "2021-10-24T14:49:54.166Z",
       },
     ]);
-  }, 1000);
+  }, 2000);
 });
 
 let port = 3001;

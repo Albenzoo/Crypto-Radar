@@ -23,9 +23,14 @@ class _HomeState extends State<Home> {
           title: Text('Crypto Radar'),
           actions: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Icon(Icons.autorenew),
-            ),
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: IconButton(
+                  icon: new Icon(Icons.autorenew),
+                  onPressed: () {
+                    print("Refresh");
+                    setState(() {});
+                  },
+                )),
           ],
           backgroundColor: kPrimaryColor,
         ),
@@ -74,6 +79,9 @@ class _HomeState extends State<Home> {
           }));
 
   Future navigateToDetailPage(String symbol) async {
-    Navigator.pushNamed(context, '/detail', arguments: "j");
+    Navigator.pushNamed(context, '/detail',
+        arguments: Detail(
+          coinSymbol: symbol,
+        ));
   }
 }
