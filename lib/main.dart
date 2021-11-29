@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projectwallet/pages/detail.dart';
+import 'package:projectwallet/pages/home.dart';
 import 'package:projectwallet/shared/constants.dart';
 import 'package:projectwallet/pages/login.dart';
 import 'package:projectwallet/shared/loading/loading.dart';
@@ -20,33 +22,24 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       builder: LoadingScreen.init(),
-      home: HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/home': (context) => Home(),
+        '/detail': (context) => Detail(coinSymbol: "btc"),
+      },
+      home: RootPage(),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+class RootPage extends StatefulWidget {
+  RootPage({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _RootPageState createState() => _RootPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  bool _isLoading = false;
-
-  void _showLoading() {
-    setState(() {
-      _isLoading = true;
-    });
-  }
-
-  void _hideLoading() {
-    setState(() {
-      _isLoading = false;
-    });
-  }
-
+class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

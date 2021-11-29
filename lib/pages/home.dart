@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projectwallet/api/crypto_api.dart';
 import 'package:projectwallet/components/crypto_card.dart';
 import 'package:projectwallet/models/CryptoMarket.dart';
+import 'package:projectwallet/pages/detail.dart';
 import 'package:projectwallet/shared/constants.dart';
 
 class Home extends StatefulWidget {
@@ -66,8 +67,13 @@ class _HomeState extends State<Home> {
                 child: cryptoCard(context, cryptoList[index]),
                 onTap: () {
                   print("clicked ${cryptoList[index].symbol.toUpperCase()}");
+                  navigateToDetailPage(cryptoList[index].symbol);
                 },
               ),
             );
           }));
+
+  Future navigateToDetailPage(String symbol) async {
+    Navigator.pushNamed(context, '/detail', arguments: "j");
+  }
 }
