@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:projectwallet/api/crypto_api.dart';
 
 class LineCryptoChart extends StatefulWidget {
   const LineCryptoChart({Key? key}) : super(key: key);
@@ -58,7 +59,12 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
     );
   }
 
+  void getMarketChartData() {
+    CryptoApi.getMarketChartData();
+  }
+
   LineChartData mainData() {
+    getMarketChartData();
     return LineChartData(
       gridData: FlGridData(
         show: true,
