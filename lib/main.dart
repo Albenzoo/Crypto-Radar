@@ -25,7 +25,10 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/home': (context) => Home(),
-        '/detail': (context) => Detail(coinSymbol: "btc"),
+        '/detail': (context) => Detail(
+              coinSymbol: "btc",
+              coinName: "bitcoin",
+            ),
       },
       home: RootPage(),
     );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:projectwallet/api/crypto_api.dart';
 import 'package:projectwallet/components/crypto_card.dart';
+import 'package:projectwallet/components/my_app_bar.dart';
+import 'package:projectwallet/main.dart';
 import 'package:projectwallet/models/CryptoMarket.dart';
 import 'package:projectwallet/pages/detail.dart';
 import 'package:projectwallet/shared/constants.dart';
@@ -16,23 +18,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: Icon(
-            Icons.radar,
-          ),
-          title: Text('Crypto Radar'),
-          actions: [
-            Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: IconButton(
-                  icon: new Icon(Icons.autorenew),
-                  onPressed: () {
-                    print("Refresh");
-                    setState(() {});
-                  },
-                )),
-          ],
-          backgroundColor: kPrimaryColor,
+        appBar: MyAppBar(
+          refreshPage: () => refresh(),
         ),
         body: Container(
           color: kSecondaryColor,
@@ -72,16 +59,23 @@ class _HomeState extends State<Home> {
                 child: cryptoCard(context, cryptoList[index]),
                 onTap: () {
                   print("clicked ${cryptoList[index].symbol.toUpperCase()}");
-                  navigateToDetailPage(cryptoList[index].symbol);
+                  navigateToDetailPage(
+                      cryptoList[index].symbol, cryptoList[index].name);
                 },
               ),
             );
           }));
 
-  Future navigateToDetailPage(String symbol) async {
+  Future navigateToDetailPage(String symbol, String name) async {
     Navigator.pushNamed(context, '/detail',
         arguments: Detail(
           coinSymbol: symbol,
+          coinName: name,
         ));
+  }
+
+/* Refresh page */
+  void refresh() {
+    setState(() {});
   }
 }
