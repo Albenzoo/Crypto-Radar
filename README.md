@@ -12,6 +12,9 @@ nodemon mocks/
 
 Lista:
 
+- fare card grafico pagina dettaglio
+  https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=eur&days=30&interval=daily
+- fare card info varie pagina dettaglio
+- fare card descrizione pagina dettaglio
 - correggere errore "indietro" dalla home alla login
-- fare pagina dettaglio crypto
 - ritoccare dettagli card della home
