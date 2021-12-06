@@ -64,7 +64,7 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
   }
 
   LineChartData mainData() {
-    getMarketChartData();
+    //getMarketChartData();
     return LineChartData(
       gridData: FlGridData(
         show: true,
