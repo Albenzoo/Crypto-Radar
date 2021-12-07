@@ -132,7 +132,7 @@ app.get("/api/v3/coins/bitcoin/market_chart", function (req, res) {
         [1638731176000, 30737020358.549934],
       ],
     });
-  }, 2000);
+  }, 5000);
 });
 
 app.get("/api/v3/coins/markets", function (req, res) {

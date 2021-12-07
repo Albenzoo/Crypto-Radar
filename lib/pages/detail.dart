@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:projectwallet/api/crypto_api.dart';
 import 'package:projectwallet/components/line_chart.dart';
 import 'package:projectwallet/components/my_app_bar.dart';
+import 'package:projectwallet/models/CryptoMarket.dart';
+import 'package:projectwallet/models/MarketChartData.dart';
 import 'package:projectwallet/shared/constants.dart';
+import 'package:projectwallet/shared/loading/loading_provider.dart';
+import 'package:provider/src/provider.dart';
 
 class Detail extends StatefulWidget {
   final String coinSymbol;
@@ -17,11 +21,15 @@ class Detail extends StatefulWidget {
 }
 
 class _DetailState extends State<Detail> {
+  late Future<MarketChartData> chartData;
+  late Future<List<CryptoMarket>> response2;
+
   @override
   void initState() {
     super.initState();
     print("siamo nel dettaglio");
-    setupMethod();
+
+    startApiChainCall();
   }
 
   @override
@@ -35,25 +43,37 @@ class _DetailState extends State<Detail> {
       ),
       body: Container(
         //child: Text(args.coinSymbol),
-        child: LineCryptoChart(),
+        child: chart(),
       ),
     );
   }
 
-  Future setupMethod() async {
+  Widget chart() {
+    return FutureBuilder<MarketChartData>(
+      future: chartData,
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+            return Center(child: CircularProgressIndicator());
+          default:
+            if (snapshot.hasError) {
+              return Center(child: Text('Some error occurred!'));
+            } else {
+              final MarketChartData chart = snapshot.data!;
+              return LineCryptoChart();
+            }
+        }
+      },
+    );
+  }
+
+  Future startApiChainCall() async {
     await Future.wait([
-      CryptoApi.getMarketChartData(),
-      CryptoApi.fetchCoin(),
-    ]).then((responseList) {
-      var risposta0 = responseList[0];
-      var risposta1 = responseList[1];
-      print("risposta 0:");
-      print(risposta0);
-      print("risposta 1:");
-      print(risposta1);
-    }, onError: (err) {
+      chartData = CryptoApi.getMarketChartData(),
+      response2 = CryptoApi.fetchCoin()
+    ]).catchError((err) {
       print("errore");
-    });
+    }).whenComplete(() => print("completate tutte le chiamate"));
   }
 
   /* Refresh page */
