@@ -1,7 +1,7 @@
 class MarketChartData {
-  final List prices;
-  final List market_caps;
-  final List total_volumes;
+  final List<dynamic> prices;
+  final List<dynamic> market_caps;
+  final List<dynamic> total_volumes;
 
   MarketChartData({
     required this.prices,

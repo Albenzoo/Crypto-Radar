@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projectwallet/shared/constants.dart';
 
 class MyAppBar extends StatefulWidget with PreferredSizeWidget {
-  Function refreshPage;
+  final Function refreshPage;
   MyAppBar({Key? key, required this.refreshPage}) : super(key: key);
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 

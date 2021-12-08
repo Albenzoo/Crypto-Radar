@@ -1,9 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:projectwallet/api/crypto_api.dart';
+import 'package:projectwallet/models/MarketChartData.dart';
 
 class LineCryptoChart extends StatefulWidget {
-  const LineCryptoChart({Key? key}) : super(key: key);
+  final MarketChartData chartData;
+  const LineCryptoChart({Key? key, required this.chartData}) : super(key: key);
 
   @override
   _LineCryptoChartState createState() => _LineCryptoChartState();
@@ -86,7 +88,7 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
         show: true,
         rightTitles: SideTitles(showTitles: false),
         topTitles: SideTitles(showTitles: false),
-        bottomTitles: SideTitles(
+/*         bottomTitles: SideTitles(
           showTitles: true,
           reservedSize: 22,
           interval: 1,
@@ -106,8 +108,8 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
             return '';
           },
           margin: 8,
-        ),
-        leftTitles: SideTitles(
+        ), */
+        /* leftTitles: SideTitles(
           showTitles: true,
           interval: 1,
           getTextStyles: (context, value) => const TextStyle(
@@ -128,25 +130,25 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
           },
           reservedSize: 32,
           margin: 12,
-        ),
+        ), */
       ),
       borderData: FlBorderData(
           show: true,
           border: Border.all(color: const Color(0xff37434d), width: 1)),
       minX: 0,
-      maxX: 11,
+      //maxX: 11,
       minY: 0,
-      maxY: 6,
+      //maxY: 6,
       lineBarsData: [
         LineChartBarData(
           spots: const [
-            FlSpot(0, 3),
-            FlSpot(2.6, 2),
-            FlSpot(4.9, 5),
-            FlSpot(6.8, 3.1),
-            FlSpot(8, 4),
-            FlSpot(9.5, 3),
-            FlSpot(11, 4),
+            FlSpot(0, 53000),
+            FlSpot(2.6, 62000),
+            FlSpot(4.9, 53000),
+            FlSpot(6.8, 51000),
+            FlSpot(8, 43000),
+            FlSpot(9.5, 47000),
+            FlSpot(11, 40000),
           ],
           isCurved: true,
           colors: gradientColors,

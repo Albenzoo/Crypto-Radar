@@ -1,4 +1,4 @@
-import 'dart:html';
+import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:projectwallet/api/crypto_api.dart';
@@ -6,9 +6,6 @@ import 'package:projectwallet/components/line_chart.dart';
 import 'package:projectwallet/components/my_app_bar.dart';
 import 'package:projectwallet/models/CryptoMarket.dart';
 import 'package:projectwallet/models/MarketChartData.dart';
-import 'package:projectwallet/shared/constants.dart';
-import 'package:projectwallet/shared/loading/loading_provider.dart';
-import 'package:provider/src/provider.dart';
 
 class Detail extends StatefulWidget {
   final String coinSymbol;
@@ -59,8 +56,8 @@ class _DetailState extends State<Detail> {
             if (snapshot.hasError) {
               return Center(child: Text('Some error occurred!'));
             } else {
-              final MarketChartData chart = snapshot.data!;
-              return LineCryptoChart();
+              //return Center(child: Text('Some error occurred!'));
+              return LineCryptoChart(chartData: snapshot.data!);
             }
         }
       },
@@ -72,7 +69,7 @@ class _DetailState extends State<Detail> {
       chartData = CryptoApi.getMarketChartData(),
       response2 = CryptoApi.fetchCoin()
     ]).catchError((err) {
-      print("errore");
+      print(err);
     }).whenComplete(() => print("completate tutte le chiamate"));
   }
 

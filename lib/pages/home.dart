@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:projectwallet/api/crypto_api.dart';
 import 'package:projectwallet/components/crypto_card.dart';
 import 'package:projectwallet/components/my_app_bar.dart';
-import 'package:projectwallet/main.dart';
 import 'package:projectwallet/models/CryptoMarket.dart';
 import 'package:projectwallet/pages/detail.dart';
 import 'package:projectwallet/shared/constants.dart';

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projectwallet/components/action_button.dart';
 import 'package:projectwallet/shared/constants.dart';
-import 'package:projectwallet/pages/home.dart';
 import 'package:projectwallet/shared/loading/loading_provider.dart';
 import 'package:provider/provider.dart';
 import '../api/crypto_api.dart';
