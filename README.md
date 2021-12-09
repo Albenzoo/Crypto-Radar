@@ -12,7 +12,6 @@ nodemon mocks/
 
 Lista:
 
-- gestione dati grafico
 - fare card info varie pagina dettaglio
 - fare card descrizione pagina dettaglio
 - il refresh del dettaglio sembra non funzionare
