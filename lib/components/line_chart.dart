@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:projectwallet/api/crypto_api.dart';
 import 'package:projectwallet/models/MarketChartData.dart';
+import 'package:intl/intl.dart';
 
 class LineCryptoChart extends StatefulWidget {
   final MarketChartData chartData;
@@ -20,6 +23,10 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
 
   @override
   Widget build(BuildContext context) {
+    List<dynamic> prices = widget.chartData.prices;
+    List<dynamic> marketCaps = widget.chartData.market_caps;
+    List<dynamic> totalVolumes = widget.chartData.total_volumes;
+
     return Stack(
       children: <Widget>[
         AspectRatio(
@@ -34,7 +41,7 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
               padding: const EdgeInsets.only(
                   right: 18.0, left: 12.0, top: 24, bottom: 12),
               child: LineChart(
-                showAvg ? avgData() : mainData(),
+                showAvg ? avgData(prices) : mainData(prices),
               ),
             ),
           ),
@@ -61,12 +68,79 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
     );
   }
 
-  void getMarketChartData() {
-    CryptoApi.getMarketChartData();
+/* Construct the point list for the chart */
+  List<FlSpot> getMarketSpots(List<dynamic> prices) {
+    List<FlSpot> mySpots = [];
+    prices.asMap().forEach((index, value) {
+      mySpots.add(
+          FlSpot(index.toDouble(), double.parse(value[1].toStringAsFixed(5))));
+    });
+    print(mySpots);
+    return mySpots;
   }
 
-  LineChartData mainData() {
-    //getMarketChartData();
+  List<double> extractPriceList(prices) {
+    List<double> priceList = [];
+    for (var currentCouple in prices) {
+      priceList.add(currentCouple[1]);
+    }
+    return priceList;
+  }
+
+  List<dynamic> extractTimestampList(prices) {
+    List<dynamic> dateList = [];
+    for (var currentCouple in prices) {
+      dateList.add(currentCouple[0]);
+    }
+    return dateList;
+  }
+
+  List<String> dateToString(List<dynamic> dateList) {
+    List<String> dateStringList = [];
+    for (var currentDateTimestamp in dateList) {
+      DateTime date = DateTime.fromMillisecondsSinceEpoch(currentDateTimestamp);
+      final DateFormat formatter = DateFormat('dd/MM');
+      final String formatted = formatter.format(date);
+      print(formatted); // something like 2013-04-20
+      dateStringList.add(formatted);
+    }
+    print("date:");
+    print(dateStringList);
+    return dateStringList;
+  }
+
+/* calculate the max y adding percentual to the max value */
+  double maxYAxis(List<dynamic> prices) {
+    int percentual = 10;
+    double maxWithPercentage =
+        maxValue(prices) + ((percentual / 100) * maxValue(prices));
+    print(maxWithPercentage);
+    return maxWithPercentage;
+  }
+
+  double maxValue(List<dynamic> prices) {
+    List<double> priceList = extractPriceList(prices);
+    return priceList.reduce(max);
+  }
+
+  double minValue(List<dynamic> prices) {
+    List<double> priceList = extractPriceList(prices);
+    return priceList.reduce(min);
+  }
+
+/* calculate the min y decreasing percentual to the min value */
+  double minYAxis(List<dynamic> prices) {
+    int percentual = 10;
+    double minWithPercentage =
+        minValue(prices) - ((percentual / 100) * minValue(prices));
+    print(minWithPercentage);
+    return minWithPercentage > 0 ? minWithPercentage : 0;
+  }
+
+  LineChartData mainData(List<dynamic> prices) {
+    List<dynamic> timestampList = extractTimestampList(prices);
+
+    List<String> stringDate = dateToString(timestampList);
     return LineChartData(
       gridData: FlGridData(
         show: true,
@@ -88,7 +162,7 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
         show: true,
         rightTitles: SideTitles(showTitles: false),
         topTitles: SideTitles(showTitles: false),
-/*         bottomTitles: SideTitles(
+        bottomTitles: SideTitles(
           showTitles: true,
           reservedSize: 22,
           interval: 1,
@@ -97,18 +171,13 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
               fontWeight: FontWeight.bold,
               fontSize: 16),
           getTitles: (value) {
-            switch (value.toInt()) {
-              case 2:
-                return 'MAR';
-              case 5:
-                return 'JUN';
-              case 8:
-                return 'SEP';
+            if (value.toInt() % 4 == 0) {
+              return stringDate[value.toInt()];
             }
             return '';
           },
           margin: 8,
-        ), */
+        ),
         /* leftTitles: SideTitles(
           showTitles: true,
           interval: 1,
@@ -135,21 +204,13 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
       borderData: FlBorderData(
           show: true,
           border: Border.all(color: const Color(0xff37434d), width: 1)),
-      minX: 0,
+      //minX: 0,
       //maxX: 11,
-      minY: 0,
-      //maxY: 6,
+      minY: minYAxis(prices),
+      maxY: maxYAxis(prices),
       lineBarsData: [
         LineChartBarData(
-          spots: const [
-            FlSpot(0, 53000),
-            FlSpot(2.6, 62000),
-            FlSpot(4.9, 53000),
-            FlSpot(6.8, 51000),
-            FlSpot(8, 43000),
-            FlSpot(9.5, 47000),
-            FlSpot(11, 40000),
-          ],
+          spots: getMarketSpots(prices),
           isCurved: true,
           colors: gradientColors,
           barWidth: 5,
@@ -167,7 +228,34 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
     );
   }
 
-  LineChartData avgData() {
+  double calculateAveragePrice(List<double> pricesValue) {
+    double sum = 0;
+    for (double currentValue in pricesValue) {
+      sum = sum + currentValue;
+    }
+    double avg = sum / pricesValue.length;
+    print("avg");
+    print(avg);
+    return avg;
+  }
+
+  /* Construct the point list for the chart */
+  List<FlSpot> getAverageSpots(double avg) {
+    List<FlSpot> mySpots = [];
+    for (int i = 0; i < 30; i++) {
+      mySpots.add(FlSpot(i.toDouble(), avg));
+    }
+    print("avg spot:");
+    print(mySpots);
+    return mySpots;
+  }
+
+  LineChartData avgData(List<dynamic> prices) {
+    List<dynamic> timestampList = extractTimestampList(prices);
+    List<double> priceList = extractPriceList(prices);
+    double avg = calculateAveragePrice(priceList);
+
+    List<String> stringDate = dateToString(timestampList);
     return LineChartData(
       lineTouchData: LineTouchData(enabled: false),
       gridData: FlGridData(
@@ -188,70 +276,18 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
       ),
       titlesData: FlTitlesData(
         show: true,
-        bottomTitles: SideTitles(
-          showTitles: true,
-          reservedSize: 22,
-          getTextStyles: (context, value) => const TextStyle(
-              color: Color(0xff68737d),
-              fontWeight: FontWeight.bold,
-              fontSize: 16),
-          getTitles: (value) {
-            switch (value.toInt()) {
-              case 2:
-                return 'MAR';
-              case 5:
-                return 'JUN';
-              case 8:
-                return 'SEP';
-            }
-            return '';
-          },
-          margin: 8,
-          interval: 1,
-        ),
-        leftTitles: SideTitles(
-          showTitles: true,
-          getTextStyles: (context, value) => const TextStyle(
-            color: Color(0xff67727d),
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-          ),
-          getTitles: (value) {
-            switch (value.toInt()) {
-              case 1:
-                return '10k';
-              case 3:
-                return '30k';
-              case 5:
-                return '50k';
-            }
-            return '';
-          },
-          reservedSize: 32,
-          interval: 1,
-          margin: 12,
-        ),
         topTitles: SideTitles(showTitles: false),
         rightTitles: SideTitles(showTitles: false),
+        bottomTitles: SideTitles(showTitles: false),
       ),
       borderData: FlBorderData(
           show: true,
           border: Border.all(color: const Color(0xff37434d), width: 1)),
-      minX: 0,
-      maxX: 11,
-      minY: 0,
-      maxY: 6,
+      minY: minYAxis(prices),
+      maxY: maxYAxis(prices),
       lineBarsData: [
         LineChartBarData(
-          spots: const [
-            FlSpot(0, 3.44),
-            FlSpot(2.6, 3.44),
-            FlSpot(4.9, 3.44),
-            FlSpot(6.8, 3.44),
-            FlSpot(8, 3.44),
-            FlSpot(9.5, 3.44),
-            FlSpot(11, 3.44),
-          ],
+          spots: getAverageSpots(avg),
           isCurved: true,
           colors: [
             ColorTween(begin: gradientColors[0], end: gradientColors[1])

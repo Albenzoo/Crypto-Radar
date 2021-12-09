@@ -59,18 +59,18 @@ class _HomeState extends State<Home> {
                 onTap: () {
                   print("clicked ${cryptoList[index].symbol.toUpperCase()}");
                   navigateToDetailPage(
-                      cryptoList[index].symbol, cryptoList[index].name);
+                      cryptoList[index].symbol, cryptoList[index].id);
                 },
               ),
             );
           }));
 
   Future navigateToDetailPage(String symbol, String name) async {
-    Navigator.pushNamed(context, '/detail',
-        arguments: Detail(
-          coinSymbol: symbol,
-          coinName: name,
-        ));
+    // Pushing a named route
+    Navigator.of(context).pushNamed(
+      '/detail',
+      arguments: {"coinSymbol": symbol, "coinName": name.toLowerCase()},
+    );
   }
 
 /* Refresh page */

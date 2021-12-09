@@ -31,7 +31,6 @@ class _DetailState extends State<Detail> {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Detail;
     print("rebuild");
 
     return Scaffold(
@@ -66,7 +65,7 @@ class _DetailState extends State<Detail> {
 
   Future startApiChainCall() async {
     await Future.wait([
-      chartData = CryptoApi.getMarketChartData(),
+      chartData = CryptoApi.getMarketChartData(this.widget.coinName),
       response2 = CryptoApi.fetchCoin()
     ]).catchError((err) {
       print(err);

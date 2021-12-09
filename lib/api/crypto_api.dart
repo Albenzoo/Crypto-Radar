@@ -23,9 +23,9 @@ class CryptoApi {
     }
   }
 
-  static Future<MarketChartData> getMarketChartData() async {
+  static Future<MarketChartData> getMarketChartData(String coinName) async {
     final response = await http.get(Uri.parse(baseUrl +
-        '/api/v3/coins/bitcoin/market_chart?vs_currency=eur&days=30&interval=daily'));
+        '/api/v3/coins/${coinName}/market_chart?vs_currency=eur&days=30&interval=daily'));
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.

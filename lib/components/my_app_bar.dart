@@ -15,8 +15,13 @@ class _MyAppBarState extends State<MyAppBar> {
   @override
   PreferredSizeWidget build(BuildContext context) {
     return AppBar(
-      leading: Icon(
-        Icons.radar,
+      leading: IconButton(
+        icon: new Icon(Icons.radar),
+        onPressed: () {
+          Navigator.of(context).pushNamed(
+            '/home',
+          );
+        },
       ),
       title: Text('Crypto Radar'),
       actions: [

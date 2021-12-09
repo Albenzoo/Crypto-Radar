@@ -5,6 +5,7 @@ import 'package:projectwallet/pages/home.dart';
 import 'package:projectwallet/shared/constants.dart';
 import 'package:projectwallet/pages/login.dart';
 import 'package:projectwallet/shared/loading/loading.dart';
+import 'package:projectwallet/shared/routeGenerator.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,13 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       builder: LoadingScreen.init(),
       initialRoute: '/',
-      routes: {
-        '/home': (context) => Home(),
-        '/detail': (context) => Detail(
-              coinSymbol: "btc",
-              coinName: "bitcoin",
-            ),
-      },
+      onGenerateRoute: RouteGenerator.generateRoute,
       home: RootPage(),
     );
   }
