@@ -50,7 +50,6 @@ class _DetailState extends State<Detail> {
             if (snapshot.hasError) {
               return Center(child: Text('Some error occurred!'));
             } else {
-              //return Center(child: Text('Some error occurred!'));
               return LineCryptoChart(chartData: snapshot.data!);
             }
         }
