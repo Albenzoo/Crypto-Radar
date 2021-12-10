@@ -75,7 +75,7 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
       mySpots.add(
           FlSpot(index.toDouble(), double.parse(value[1].toStringAsFixed(5))));
     });
-    print(mySpots);
+    //print(mySpots);
     return mySpots;
   }
 
@@ -101,11 +101,9 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
       DateTime date = DateTime.fromMillisecondsSinceEpoch(currentDateTimestamp);
       final DateFormat formatter = DateFormat('dd/MM');
       final String formatted = formatter.format(date);
-      print(formatted); // something like 2013-04-20
+      //print(formatted); // something like 2013-04-20
       dateStringList.add(formatted);
     }
-    print("date:");
-    print(dateStringList);
     return dateStringList;
   }
 
@@ -114,7 +112,6 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
     int percentual = 10;
     double maxWithPercentage =
         maxValue(prices) + ((percentual / 100) * maxValue(prices));
-    print(maxWithPercentage);
     return maxWithPercentage;
   }
 
@@ -133,7 +130,6 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
     int percentual = 10;
     double minWithPercentage =
         minValue(prices) - ((percentual / 100) * minValue(prices));
-    print(minWithPercentage);
     return minWithPercentage > 0 ? minWithPercentage : 0;
   }
 
@@ -234,8 +230,6 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
       sum = sum + currentValue;
     }
     double avg = sum / pricesValue.length;
-    print("avg");
-    print(avg);
     return avg;
   }
 
@@ -245,8 +239,6 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
     for (int i = 0; i < 30; i++) {
       mySpots.add(FlSpot(i.toDouble(), avg));
     }
-    print("avg spot:");
-    print(mySpots);
     return mySpots;
   }
 

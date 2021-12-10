@@ -1,9 +1,8 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:projectwallet/api/crypto_api.dart';
 import 'package:projectwallet/components/line_chart.dart';
 import 'package:projectwallet/components/my_app_bar.dart';
+import 'package:projectwallet/models/CoinInfo.dart';
 import 'package:projectwallet/models/CryptoMarket.dart';
 import 'package:projectwallet/models/MarketChartData.dart';
 
@@ -19,20 +18,16 @@ class Detail extends StatefulWidget {
 
 class _DetailState extends State<Detail> {
   late Future<MarketChartData> chartData;
-  late Future<List<CryptoMarket>> response2;
+  late Future<CoinInfo> coinInfo;
 
   @override
   void initState() {
     super.initState();
-    print("siamo nel dettaglio");
-
     startApiChainCall();
   }
 
   @override
   Widget build(BuildContext context) {
-    print("rebuild");
-
     return Scaffold(
       appBar: MyAppBar(
         refreshPage: () => refresh(),
@@ -66,15 +61,19 @@ class _DetailState extends State<Detail> {
   Future startApiChainCall() async {
     await Future.wait([
       chartData = CryptoApi.getMarketChartData(this.widget.coinName),
-      response2 = CryptoApi.fetchCoin()
-    ]).catchError((err) {
-      print(err);
-    }).whenComplete(() => print("completate tutte le chiamate"));
+      coinInfo = CryptoApi.getCoinInfo(this.widget.coinName),
+    ]).catchError((Object e, StackTrace stackTrace) {
+      print(e.toString());
+      print(stackTrace);
+      return [
+        {e.toString()}
+      ];
+    }).whenComplete(() => print("API calls completed!"));
   }
 
   /* Refresh page */
   void refresh() {
-    print("Aggiorno");
+    print("Refresh");
     setState(() {});
   }
 }
