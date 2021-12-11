@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projectwallet/api/crypto_api.dart';
+import 'package:projectwallet/components/info_box.dart';
 import 'package:projectwallet/components/line_chart.dart';
 import 'package:projectwallet/components/my_app_bar.dart';
 import 'package:projectwallet/models/CoinInfo.dart';
@@ -28,14 +29,54 @@ class _DetailState extends State<Detail> {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData queryData;
+    queryData = MediaQuery.of(context);
     return Scaffold(
-      appBar: MyAppBar(
-        refreshPage: () => refresh(),
-      ),
-      body: Container(
+        appBar: MyAppBar(
+          refreshPage: () => refresh(),
+        ),
+        body: queryData.size.width > 1100
+            ? desktopOrientation()
+            : mobileOrientation());
+  }
+
+  Widget desktopOrientation() {
+    return Row(
         //child: Text(args.coinSymbol),
-        child: chart(),
-      ),
+        children: [
+          Expanded(child: Align(alignment: Alignment.center, child: chart())),
+          Expanded(
+              child:
+                  Align(alignment: Alignment.center, child: informationBox())),
+        ]);
+  }
+
+  Widget mobileOrientation() {
+    return Column(
+        //child: Text(args.coinSymbol),
+        children: [
+          Expanded(child: Align(alignment: Alignment.center, child: chart())),
+          Expanded(
+              child:
+                  Align(alignment: Alignment.center, child: informationBox())),
+        ]);
+  }
+
+  Widget informationBox() {
+    return FutureBuilder<CoinInfo>(
+      future: coinInfo,
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+            return Center(child: CircularProgressIndicator());
+          default:
+            if (snapshot.hasError) {
+              return Center(child: Text('Some error occurred!'));
+            } else {
+              return InfoBox(coinInfo: snapshot.data!);
+            }
+        }
+      },
     );
   }
 
