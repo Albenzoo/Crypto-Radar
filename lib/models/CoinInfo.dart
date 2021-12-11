@@ -4,8 +4,8 @@ class CoinInfo {
   String name;
   int? blockTimeInMinutes;
   String? hashingAlgorithm;
-  List<String>? categories;
-  Map<String, String>? localization;
+  List<dynamic>? categories;
+  Lang? localization;
   Map<String, dynamic> description;
   Links? links;
   Image image;
@@ -61,10 +61,10 @@ class CoinInfo {
       blockTimeInMinutes: json['blockTimeInMinutes'],
       hashingAlgorithm: json['hashingAlgorithm'],
       categories: json['categories'],
-      localization: json['localization'],
+      localization: Lang.fromJson(json["localization"]),
       description: json['description'],
-      links: json['links'],
-      image: json['image'],
+      links: Links.fromJson(json["links"]),
+      image: Image.fromJson(json["image"]),
       countryOrigin: json['countryOrigin'],
       genesisDate: json['genesisDate'],
       sentimentVotesUpPercentage: json['sentimentVotesUpPercentage'],
@@ -82,6 +82,102 @@ class CoinInfo {
       lastUpdated: json['lastUpdated'],
     );
   }
+}
+
+class Lang {
+  Lang({
+    this.en,
+    this.de,
+    this.es,
+    this.fr,
+    this.it,
+    this.pl,
+    this.ro,
+    this.hu,
+    this.nl,
+    this.pt,
+    this.sv,
+    this.vi,
+    this.tr,
+    this.ru,
+    this.ja,
+    this.zh,
+    this.zhTw,
+    this.ko,
+    this.ar,
+    this.th,
+    this.id,
+  });
+
+  String? en;
+  String? de;
+  String? es;
+  String? fr;
+  String? it;
+  String? pl;
+  String? ro;
+  String? hu;
+  String? nl;
+  String? pt;
+  String? sv;
+  String? vi;
+  String? tr;
+  String? ru;
+  String? ja;
+  String? zh;
+  String? zhTw;
+  String? ko;
+  String? ar;
+  String? th;
+  String? id;
+
+  factory Lang.fromJson(Map<String, dynamic> json) => Lang(
+        en: json["en"],
+        de: json["de"],
+        es: json["es"],
+        fr: json["fr"],
+        it: json["it"],
+        pl: json["pl"],
+        ro: json["ro"],
+        hu: json["hu"],
+        nl: json["nl"],
+        pt: json["pt"],
+        sv: json["sv"],
+        vi: json["vi"],
+        tr: json["tr"],
+        ru: json["ru"],
+        ja: json["ja"],
+        zh: json["zh"],
+        zhTw: json["zh-tw"],
+        ko: json["ko"],
+        ar: json["ar"],
+        th: json["th"],
+        id: json["id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "en": en,
+        "de": de,
+        "es": es,
+        "fr": fr,
+        "it": it,
+        "pl": pl,
+        "ro": ro,
+        "hu": hu,
+        "nl": nl,
+        "pt": pt,
+        "sv": sv,
+        "vi": vi,
+        "tr": tr,
+        "ru": ru,
+        "ja": ja,
+        "zh": zh,
+        "zh-tw": zhTw,
+        "ko": ko,
+        "ar": ar,
+        "th": th,
+        "id": id,
+      };
 }
 
 class Links {
@@ -108,6 +204,22 @@ class Links {
   dynamic bitcointalkThreadIdentifier;
   String? telegramChannelIdentifier;
   String? subredditUrl;
+
+  factory Links.fromJson(Map<String, dynamic> json) => Links(
+        homepage: List<String>.from(json["homepage"].map((x) => x)),
+        blockchainSite:
+            List<String>.from(json["blockchain_site"].map((x) => x)),
+        officialForumUrl:
+            List<String>.from(json["official_forum_url"].map((x) => x)),
+        chatUrl: List<String>.from(json["chat_url"].map((x) => x)),
+        announcementUrl:
+            List<String>.from(json["announcement_url"].map((x) => x)),
+        twitterScreenName: json["twitter_screen_name"],
+        facebookUsername: json["facebook_username"],
+        bitcointalkThreadIdentifier: json["bitcointalk_thread_identifier"],
+        telegramChannelIdentifier: json["telegram_channel_identifier"],
+        subredditUrl: json["subreddit_url"],
+      );
 }
 
 class Image {
@@ -120,6 +232,12 @@ class Image {
   String thumb;
   String small;
   String large;
+
+  factory Image.fromJson(Map<String, dynamic> json) => Image(
+        thumb: json["thumb"],
+        small: json["small"],
+        large: json["large"],
+      );
 }
 
 class MarketData {
