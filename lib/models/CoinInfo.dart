@@ -8,7 +8,7 @@ class CoinInfo {
   Lang? localization;
   Map<String, dynamic> description;
   Links? links;
-  Image image;
+  CoinImage image;
   String? countryOrigin;
   DateTime? genesisDate;
   double? sentimentVotesUpPercentage;
@@ -20,7 +20,7 @@ class CoinInfo {
   double? communityScore;
   double? liquidityScore;
   int? publicInterestScore;
-  MarketData? marketData;
+  MarketData market_data;
   CommunityData? communityData;
   List<dynamic>? statusUpdates;
   DateTime? lastUpdated;
@@ -47,7 +47,7 @@ class CoinInfo {
     this.communityScore,
     this.liquidityScore,
     this.publicInterestScore,
-    this.marketData,
+    required this.market_data,
     this.communityData,
     this.statusUpdates,
     this.lastUpdated,
@@ -64,7 +64,7 @@ class CoinInfo {
       localization: Lang.fromJson(json["localization"]),
       description: json['description'],
       links: Links.fromJson(json["links"]),
-      image: Image.fromJson(json["image"]),
+      image: CoinImage.fromJson(json["image"]),
       countryOrigin: json['countryOrigin'],
       genesisDate: json['genesisDate'],
       sentimentVotesUpPercentage: json['sentimentVotesUpPercentage'],
@@ -76,7 +76,7 @@ class CoinInfo {
       communityScore: json['communityScore'],
       liquidityScore: json['liquidityScore'],
       publicInterestScore: json['publicInterestScore'],
-      marketData: json['marketData'],
+      market_data: MarketData.fromJson(json['market_data']),
       communityData: json['communityData'],
       statusUpdates: json['statusUpdates'],
       lastUpdated: json['lastUpdated'],
@@ -222,8 +222,8 @@ class Links {
       );
 }
 
-class Image {
-  Image({
+class CoinImage {
+  CoinImage({
     required this.thumb,
     required this.small,
     required this.large,
@@ -233,7 +233,7 @@ class Image {
   String small;
   String large;
 
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
+  factory CoinImage.fromJson(Map<String, dynamic> json) => CoinImage(
         thumb: json["thumb"],
         small: json["small"],
         large: json["large"],
@@ -242,7 +242,7 @@ class Image {
 
 class MarketData {
   MarketData({
-    required this.currentPrice,
+    required this.current_price,
     this.totalValueLocked,
     this.mcapToTvlRatio,
     this.fdvToTvlRatio,
@@ -286,7 +286,7 @@ class MarketData {
     this.lastUpdated,
   });
 
-  Map<String, double> currentPrice;
+  Map<String, double> current_price;
   dynamic totalValueLocked;
   dynamic mcapToTvlRatio;
   dynamic fdvToTvlRatio;
@@ -328,6 +328,88 @@ class MarketData {
   int? maxSupply;
   int? circulatingSupply;
   DateTime? lastUpdated;
+
+  factory MarketData.fromJson(Map<String, dynamic> json) => MarketData(
+        current_price: Map.from(json["current_price"])
+            .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        totalValueLocked: json["total_value_locked"],
+        mcapToTvlRatio: json["mcap_to_tvl_ratio"],
+        fdvToTvlRatio: json["fdv_to_tvl_ratio"],
+        roi: json["roi"],
+        ath: Map.from(json["ath"])
+            .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        athChangePercentage: Map.from(json["ath_change_percentage"])
+            .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        athDate: Map.from(json["ath_date"])
+            .map((k, v) => MapEntry<String, DateTime>(k, DateTime.parse(v))),
+        atl: Map.from(json["atl"])
+            .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        atlChangePercentage: Map.from(json["atl_change_percentage"])
+            .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        atlDate: Map.from(json["atl_date"])
+            .map((k, v) => MapEntry<String, DateTime>(k, DateTime.parse(v))),
+        marketCap: Map.from(json["market_cap"])
+            .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        marketCapRank: json["market_cap_rank"],
+        totalVolume: Map.from(json["total_volume"])
+            .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        high24H: Map.from(json["high_24h"])
+            .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        low24H: Map.from(json["low_24h"])
+            .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        priceChange24H: json["price_change_24h"].toDouble(),
+        priceChangePercentage24H:
+            json["price_change_percentage_24h"].toDouble(),
+        priceChangePercentage7D: json["price_change_percentage_7d"].toDouble(),
+        priceChangePercentage14D:
+            json["price_change_percentage_14d"].toDouble(),
+        priceChangePercentage30D:
+            json["price_change_percentage_30d"].toDouble(),
+        priceChangePercentage60D:
+            json["price_change_percentage_60d"].toDouble(),
+        priceChangePercentage200D:
+            json["price_change_percentage_200d"].toDouble(),
+        priceChangePercentage1Y: json["price_change_percentage_1y"].toDouble(),
+        marketCapChange24H: json["market_cap_change_24h"].toDouble(),
+        marketCapChangePercentage24H:
+            json["market_cap_change_percentage_24h"].toDouble(),
+        priceChange24HInCurrency: Map.from(json["price_change_24h_in_currency"])
+            .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        priceChangePercentage1HInCurrency:
+            Map.from(json["price_change_percentage_1h_in_currency"])
+                .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        priceChangePercentage24HInCurrency:
+            Map.from(json["price_change_percentage_24h_in_currency"])
+                .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        priceChangePercentage7DInCurrency:
+            Map.from(json["price_change_percentage_7d_in_currency"])
+                .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        priceChangePercentage14DInCurrency:
+            Map.from(json["price_change_percentage_14d_in_currency"])
+                .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        priceChangePercentage30DInCurrency:
+            Map.from(json["price_change_percentage_30d_in_currency"])
+                .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        priceChangePercentage60DInCurrency:
+            Map.from(json["price_change_percentage_60d_in_currency"])
+                .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        priceChangePercentage200DInCurrency:
+            Map.from(json["price_change_percentage_200d_in_currency"])
+                .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        priceChangePercentage1YInCurrency:
+            Map.from(json["price_change_percentage_1y_in_currency"])
+                .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        marketCapChange24HInCurrency:
+            Map.from(json["market_cap_change_24h_in_currency"])
+                .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        marketCapChangePercentage24HInCurrency:
+            Map.from(json["market_cap_change_percentage_24h_in_currency"])
+                .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+        totalSupply: json["total_supply"].toDouble(),
+        maxSupply: json["max_supply"],
+        circulatingSupply: json["circulating_supply"].toDouble(),
+        lastUpdated: DateTime.parse(json["last_updated"]),
+      );
 }
 
 class CommunityData {
