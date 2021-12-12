@@ -35,7 +35,7 @@ class _DetailState extends State<Detail> {
         appBar: MyAppBar(
           refreshPage: () => refresh(),
         ),
-        body: queryData.size.width > 1100
+        body: queryData.size.width > 700
             ? desktopOrientation()
             : mobileOrientation());
   }
@@ -44,10 +44,11 @@ class _DetailState extends State<Detail> {
     return Row(
         //child: Text(args.coinSymbol),
         children: [
-          Expanded(child: Align(alignment: Alignment.center, child: chart())),
           Expanded(
-              child:
-                  Align(alignment: Alignment.center, child: informationBox())),
+              child: Align(alignment: Alignment.topCenter, child: chart())),
+          Expanded(
+              child: Align(
+                  alignment: Alignment.topCenter, child: informationBox())),
         ]);
   }
 
@@ -55,10 +56,11 @@ class _DetailState extends State<Detail> {
     return Column(
         //child: Text(args.coinSymbol),
         children: [
-          Expanded(child: Align(alignment: Alignment.center, child: chart())),
           Expanded(
-              child:
-                  Align(alignment: Alignment.center, child: informationBox())),
+              child: Align(alignment: Alignment.topCenter, child: chart())),
+          Expanded(
+              child: Align(
+                  alignment: Alignment.topCenter, child: informationBox())),
         ]);
   }
 
