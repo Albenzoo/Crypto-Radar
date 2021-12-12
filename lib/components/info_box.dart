@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:projectwallet/models/CoinInfo.dart';
 import 'package:projectwallet/shared/constants.dart';
+import 'dart:js' as js;
 
 class InfoBox extends StatefulWidget {
   final CoinInfo coinInfo;
@@ -16,6 +18,7 @@ class _InfoBoxState extends State<InfoBox> {
   Widget build(BuildContext context) {
     CoinInfo coinInfo = widget.coinInfo;
     MarketData marketData = coinInfo.market_data;
+    Links? links = coinInfo.links;
 
     return Container(
       padding: EdgeInsets.all(18),
@@ -43,102 +46,130 @@ class _InfoBoxState extends State<InfoBox> {
           Row(children: [
             Padding(
               padding: EdgeInsets.only(right: 8),
-              child: Text("Prezzo:", style: TextStyle(fontSize: 15)),
+              child: Text("Valore:", style: TextStyle(fontSize: 15)),
             ),
-            Text(marketData.current_price['eur'].toString(),
+            Text("${marketData.current_price['eur'].toString()}€",
                 style: TextStyle(fontSize: 15)),
           ]),
           Row(children: [
             Padding(
               padding: EdgeInsets.only(right: 8),
-              child: Text("Prezzo", style: TextStyle(fontSize: 15)),
+              child: Text("Market Cap:", style: TextStyle(fontSize: 15)),
             ),
-            Text("155555€", style: TextStyle(fontSize: 15)),
+            Text("${marketData.marketCap?['eur'].toString()}€",
+                style: TextStyle(fontSize: 15)),
           ]),
           Row(children: [
             Padding(
               padding: EdgeInsets.only(right: 8),
-              child: Text("Prezzo", style: TextStyle(fontSize: 15)),
+              child: Text("Market Cap Rank:", style: TextStyle(fontSize: 15)),
             ),
-            Text("155555€", style: TextStyle(fontSize: 15)),
+            Text("#${marketData.marketCapRank.toString()}",
+                style: TextStyle(fontSize: 15)),
           ]),
           Row(children: [
             Padding(
               padding: EdgeInsets.only(right: 8),
-              child: Text("Prezzo", style: TextStyle(fontSize: 15)),
+              child: Text("All Time High:", style: TextStyle(fontSize: 15)),
             ),
-            Text("155555€", style: TextStyle(fontSize: 15)),
+            Text(
+                "${marketData.ath['eur'].toString()}€ in data ${dateToString(marketData.athDate['eur'])}",
+                style: TextStyle(fontSize: 15)),
           ]),
           Row(children: [
             Padding(
               padding: EdgeInsets.only(right: 8),
-              child: Text("Prezzo", style: TextStyle(fontSize: 15)),
+              child: Text("Volume:", style: TextStyle(fontSize: 15)),
             ),
-            Text("155555€", style: TextStyle(fontSize: 15)),
+            Text("${marketData.totalVolume?['eur'].toString()}€",
+                style: TextStyle(fontSize: 15)),
           ]),
           Row(children: [
             Padding(
               padding: EdgeInsets.only(right: 8),
-              child: Text("Prezzo", style: TextStyle(fontSize: 15)),
+              child: Text("High 24h:", style: TextStyle(fontSize: 15)),
             ),
-            Text("155555€", style: TextStyle(fontSize: 15)),
+            Text("${marketData.high24H?['eur'].toString()}€",
+                style: TextStyle(fontSize: 15)),
           ]),
           Row(children: [
             Padding(
               padding: EdgeInsets.only(right: 8),
-              child: Text("Prezzo", style: TextStyle(fontSize: 15)),
+              child: Text("Low 24h:", style: TextStyle(fontSize: 15)),
             ),
-            Text("155555€", style: TextStyle(fontSize: 15)),
+            Text("${marketData.low24H?['eur'].toString()}€",
+                style: TextStyle(fontSize: 15)),
           ]),
           Row(children: [
             Padding(
               padding: EdgeInsets.only(right: 8),
-              child: Text("Prezzo", style: TextStyle(fontSize: 15)),
+              child: Text("Variazione prezzo 24h:",
+                  style: TextStyle(fontSize: 15)),
             ),
-            Text("155555€", style: TextStyle(fontSize: 15)),
+            Text("${marketData.priceChangePercentage24H?.toStringAsFixed(2)}%",
+                style: TextStyle(fontSize: 15)),
           ]),
           Row(children: [
             Padding(
               padding: EdgeInsets.only(right: 8),
-              child: Text("Prezzo", style: TextStyle(fontSize: 15)),
+              child: Text("Variazione prezzo 7 giorni:",
+                  style: TextStyle(fontSize: 15)),
             ),
-            Text("155555€", style: TextStyle(fontSize: 15)),
+            Text("${marketData.priceChangePercentage7D?.toStringAsFixed(2)}%",
+                style: TextStyle(fontSize: 15)),
           ]),
           Row(children: [
             Padding(
               padding: EdgeInsets.only(right: 8),
-              child: Text("Prezzo", style: TextStyle(fontSize: 15)),
+              child: Text("Variazione prezzo 30 giorni:",
+                  style: TextStyle(fontSize: 15)),
             ),
-            Text("155555€", style: TextStyle(fontSize: 15)),
+            Text("${marketData.priceChangePercentage30D?.toStringAsFixed(2)}%",
+                style: TextStyle(fontSize: 15)),
           ]),
           Row(children: [
             Padding(
               padding: EdgeInsets.only(right: 8),
-              child: Text("Prezzo", style: TextStyle(fontSize: 15)),
+              child: Text("Variazione prezzo 200 giorni:",
+                  style: TextStyle(fontSize: 15)),
             ),
-            Text("155555€", style: TextStyle(fontSize: 15)),
+            Text("${marketData.priceChangePercentage200D?.toStringAsFixed(2)}%",
+                style: TextStyle(fontSize: 15)),
           ]),
           Row(children: [
             Padding(
               padding: EdgeInsets.only(right: 8),
-              child: Text("Prezzo", style: TextStyle(fontSize: 15)),
+              child: Text("Variazione prezzo 1 anno:",
+                  style: TextStyle(fontSize: 15)),
             ),
-            Text("155555€", style: TextStyle(fontSize: 15)),
+            Text("${marketData.priceChangePercentage1Y?.toStringAsFixed(2)}%",
+                style: TextStyle(fontSize: 15)),
           ]),
           Row(children: [
             Padding(
               padding: EdgeInsets.only(right: 8),
-              child: Text("Prezzo", style: TextStyle(fontSize: 15)),
+              child:
+                  Text("Prezzi aggiornati al:", style: TextStyle(fontSize: 15)),
             ),
-            Text("155555€", style: TextStyle(fontSize: 15)),
+            Text("${dateToString(marketData.lastUpdated)}",
+                style: TextStyle(fontSize: 15)),
           ]),
-          Row(children: [
-            Padding(
-              padding: EdgeInsets.only(right: 8),
-              child: Text("Prezzo", style: TextStyle(fontSize: 15)),
-            ),
-            Text("155555€", style: TextStyle(fontSize: 15)),
-          ]),
+          Padding(
+            padding: EdgeInsets.only(right: 8),
+            child: Row(children: [
+              Text("Link: ", style: TextStyle(fontSize: 15)),
+              MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: () {
+                    print("vai alla homepage");
+                    js.context.callMethod('open', [links?.homepage?[0]]);
+                  }, // handle your image tap here
+                  child: Image.network(coinInfo.image.thumb),
+                ),
+              ),
+            ]),
+          ),
           Row(children: [
             Padding(
               padding: EdgeInsets.only(right: 8),
@@ -155,4 +186,13 @@ class _InfoBoxState extends State<InfoBox> {
       ),
     );
   }
+}
+
+String dateToString(DateTime? date) {
+  if (date == null) {
+    return '';
+  }
+  final DateFormat formatter = DateFormat('dd/MM/yyyy');
+  final String formatted = formatter.format(date);
+  return formatted;
 }
