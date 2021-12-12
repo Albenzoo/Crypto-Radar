@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:projectwallet/custom_icon/custom_icon.dart';
 import 'package:projectwallet/models/CoinInfo.dart';
 import 'package:projectwallet/shared/constants.dart';
 import 'dart:js' as js;
@@ -168,19 +169,50 @@ class _InfoBoxState extends State<InfoBox> {
                   child: Image.network(coinInfo.image.thumb),
                 ),
               ),
+              MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: () {
+                    print("vai alla homepage");
+                    js.context.callMethod('open', [links?.subredditUrl]);
+                  }, // handle your image tap here
+                  child: Icon(
+                    CustomIcon.reddit_1,
+                    size: 24.0,
+                  ),
+                ),
+              ),
+              MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: () {
+                    print("vai alla homepage");
+                    js.context.callMethod('open', [
+                      'https://www.facebook.com/${links?.facebookUsername}'
+                    ]);
+                  }, // handle your image tap here
+                  child: Icon(
+                    Icons.facebook,
+                    size: 25.0,
+                  ),
+                ),
+              ),
+              MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: () {
+                    print("vai alla homepage");
+                    js.context.callMethod('open', [
+                      'https://www.twitter.com/${links?.twitterScreenName}'
+                    ]);
+                  }, // handle your image tap here
+                  child: Icon(
+                    CustomIcon.twitter_squared,
+                    size: 24.0,
+                  ),
+                ),
+              ),
             ]),
-          ),
-          Row(children: [
-            Padding(
-              padding: EdgeInsets.only(right: 8),
-              child: Text("Prezzo", style: TextStyle(fontSize: 15)),
-            ),
-            Text("155555€", style: TextStyle(fontSize: 15)),
-          ]),
-          Text(
-            "Hx!!",
-            style: TextStyle(fontSize: 30),
-            textAlign: TextAlign.left,
           ),
         ],
       ),
