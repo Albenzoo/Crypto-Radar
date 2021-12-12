@@ -19,7 +19,7 @@ class CoinInfo {
   double? developerScore;
   double? communityScore;
   double? liquidityScore;
-  int? publicInterestScore;
+  double? publicInterestScore;
   MarketData market_data;
   CommunityData? communityData;
   List<dynamic>? statusUpdates;
@@ -311,7 +311,7 @@ class MarketData {
   double? priceChangePercentage30D;
   double? priceChangePercentage200D;
   double? priceChangePercentage1Y;
-  int? marketCapChange24H;
+  double? marketCapChange24H;
   double? marketCapChangePercentage24H;
   Map<String, double>? priceChange24HInCurrency;
   Map<String, double>? priceChangePercentage1HInCurrency;
@@ -324,9 +324,9 @@ class MarketData {
   Map<String, double>? priceChangePercentage1YInCurrency;
   Map<String, double>? marketCapChange24HInCurrency;
   Map<String, double>? marketCapChangePercentage24HInCurrency;
-  int? totalSupply;
-  int? maxSupply;
-  int? circulatingSupply;
+  double? totalSupply;
+  double? maxSupply;
+  double? circulatingSupply;
   DateTime? lastUpdated;
 
   factory MarketData.fromJson(Map<String, dynamic> json) => MarketData(
@@ -370,7 +370,7 @@ class MarketData {
         priceChangePercentage200D:
             json["price_change_percentage_200d"].toDouble(),
         priceChangePercentage1Y: json["price_change_percentage_1y"].toDouble(),
-        marketCapChange24H: json["market_cap_change_24h"].toDouble(),
+        marketCapChange24H: json["market_cap_change_24h"],
         marketCapChangePercentage24H:
             json["market_cap_change_percentage_24h"].toDouble(),
         priceChange24HInCurrency: Map.from(json["price_change_24h_in_currency"])
@@ -405,9 +405,9 @@ class MarketData {
         marketCapChangePercentage24HInCurrency:
             Map.from(json["market_cap_change_percentage_24h_in_currency"])
                 .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
-        totalSupply: json["total_supply"].toDouble(),
+        totalSupply: json["total_supply"],
         maxSupply: json["max_supply"],
-        circulatingSupply: json["circulating_supply"].toDouble(),
+        circulatingSupply: json["circulating_supply"],
         lastUpdated: DateTime.parse(json["last_updated"]),
       );
 }
