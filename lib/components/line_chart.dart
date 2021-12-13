@@ -33,6 +33,8 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
           child: AspectRatio(
             aspectRatio: 1.70,
             child: Container(
+              //padding: EdgeInsets.all(18),
+              margin: EdgeInsets.only(right: 0, left: 20, top: 20, bottom: 20),
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(
                     Radius.circular(18),
@@ -40,7 +42,7 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
                   color: Color(0xff232d37)),
               child: Padding(
                 padding: const EdgeInsets.only(
-                    right: 18.0, left: 12.0, top: 24, bottom: 12),
+                    right: 18.0, left: 12.0, top: 32, bottom: 12),
                 child: LineChart(
                   showAvg ? avgData(prices) : mainData(prices),
                 ),
@@ -48,24 +50,28 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
             ),
           ),
         ),
-        SizedBox(
-          width: 60,
-          height: 34,
-          child: TextButton(
-            onPressed: () {
-              setState(() {
-                showAvg = !showAvg;
-              });
-            },
-            child: Text(
-              'avg',
-              style: TextStyle(
-                  fontSize: 12,
-                  color:
-                      showAvg ? Colors.white.withOpacity(0.5) : Colors.white),
-            ),
-          ),
-        ),
+        Padding(
+            padding: const EdgeInsets.only(
+                right: 18.0, left: 22.0, top: 20, bottom: 10),
+            child: SizedBox(
+              width: 60,
+              height: 34,
+              child: TextButton(
+                onPressed: () {
+                  setState(() {
+                    showAvg = !showAvg;
+                  });
+                },
+                child: Text(
+                  'avg',
+                  style: TextStyle(
+                      fontSize: 12,
+                      color: showAvg
+                          ? Colors.white.withOpacity(0.5)
+                          : Colors.white),
+                ),
+              ),
+            )),
       ],
     );
   }
@@ -169,7 +175,7 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
               fontWeight: FontWeight.bold,
               fontSize: 16),
           getTitles: (value) {
-            if (value.toInt() % 4 == 0) {
+            if (value.toInt() % 5 == 1) {
               return stringDate[value.toInt()];
             }
             return '';

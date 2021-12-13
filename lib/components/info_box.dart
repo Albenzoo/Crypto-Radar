@@ -26,7 +26,7 @@ class _InfoBoxState extends State<InfoBox> {
       margin: EdgeInsets.all(20),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black, width: 4),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(18),
         boxShadow: [
           new BoxShadow(
             color: kPrimaryColor,

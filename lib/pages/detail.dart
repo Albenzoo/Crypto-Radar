@@ -69,7 +69,12 @@ class _DetailState extends State<Detail> {
           children: [
             Row(children: [
               Expanded(
-                  child: Align(alignment: Alignment.topCenter, child: chart())),
+                child: Padding(
+                    padding:
+                        EdgeInsets.only(right: 20, left: 0, top: 0, bottom: 0),
+                    child:
+                        Align(alignment: Alignment.topCenter, child: chart())),
+              )
             ]),
             Row(children: [
               Expanded(
@@ -113,10 +118,10 @@ class _DetailState extends State<Detail> {
   Widget descriptionBox(String description) {
     return Container(
       padding: EdgeInsets.all(12),
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.only(right: 20, left: 20, top: 5, bottom: 20),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black, width: 4),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(18),
         boxShadow: [
           new BoxShadow(
             color: kPrimaryColor,
