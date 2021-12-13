@@ -49,6 +49,9 @@ class _DetailState extends State<Detail> {
           Expanded(
               child: Align(
                   alignment: Alignment.topCenter, child: informationBox())),
+          Row(children: [
+            descriptionBox(),
+          ]),
         ]);
   }
 
@@ -62,6 +65,25 @@ class _DetailState extends State<Detail> {
               child: Align(
                   alignment: Alignment.topCenter, child: informationBox())),
         ]);
+  }
+
+  Widget descriptionBox() {
+    return FutureBuilder<CoinInfo>(
+      future: coinInfo,
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+            return Center(child: CircularProgressIndicator());
+          default:
+            if (snapshot.hasError) {
+              return Center(child: Text('Some error occurred!'));
+            } else {
+              CoinInfo response = snapshot.data!;
+              return Text(response.name, style: TextStyle(fontSize: 25));
+            }
+        }
+      },
+    );
   }
 
   Widget informationBox() {
