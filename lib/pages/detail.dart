@@ -6,6 +6,7 @@ import 'package:projectwallet/components/my_app_bar.dart';
 import 'package:projectwallet/models/CoinInfo.dart';
 import 'package:projectwallet/models/CryptoMarket.dart';
 import 'package:projectwallet/models/MarketChartData.dart';
+import 'package:projectwallet/shared/constants.dart';
 
 class Detail extends StatefulWidget {
   final String coinSymbol;
@@ -41,18 +42,26 @@ class _DetailState extends State<Detail> {
   }
 
   Widget desktopOrientation() {
-    return Row(
-        //child: Text(args.coinSymbol),
-        children: [
-          Expanded(
-              child: Align(alignment: Alignment.topCenter, child: chart())),
-          Expanded(
-              child: Align(
-                  alignment: Alignment.topCenter, child: informationBox())),
-          Row(children: [
-            descriptionBox(),
+    return SingleChildScrollView(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+          //child: Text(args.coinSymbol),
+          children: [
+            Row(children: [
+              Expanded(
+                  // constrain height
+                  child: Align(alignment: Alignment.topCenter, child: chart())),
+              Expanded(
+// constrain height
+                  child: Align(
+                      alignment: Alignment.topCenter, child: informationBox())),
+            ]),
+            Row(children: [
+              Expanded(
+                child: descriptionBoxFuture(),
+              )
+            ]),
           ]),
-        ]);
+    );
   }
 
   Widget mobileOrientation() {
@@ -67,7 +76,7 @@ class _DetailState extends State<Detail> {
         ]);
   }
 
-  Widget descriptionBox() {
+  Widget descriptionBoxFuture() {
     return FutureBuilder<CoinInfo>(
       future: coinInfo,
       builder: (context, snapshot) {
@@ -79,10 +88,46 @@ class _DetailState extends State<Detail> {
               return Center(child: Text('Some error occurred!'));
             } else {
               CoinInfo response = snapshot.data!;
-              return Text(response.name, style: TextStyle(fontSize: 25));
+              String description = "Non disponibile";
+              if (response.description['it'] != null) {
+                description = response.description['it'];
+              } else {
+                description = response.description['en'];
+              }
+              return descriptionBox(description);
             }
         }
       },
+    );
+  }
+
+  Widget descriptionBox(String description) {
+    return Container(
+      padding: EdgeInsets.all(12),
+      margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black, width: 4),
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          new BoxShadow(
+            color: kPrimaryColor,
+            offset: new Offset(6.0, 6.0),
+          ),
+        ],
+      ),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Row(children: [
+          Text("Descrizione", style: TextStyle(fontSize: 25)),
+        ]),
+        Row(children: [
+          Flexible(
+            child: Padding(
+              padding: EdgeInsets.only(top: 8),
+              child: Text(description, style: TextStyle(fontSize: 15)),
+            ),
+          ),
+        ]),
+      ]),
     );
   }
 
