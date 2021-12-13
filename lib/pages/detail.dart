@@ -48,10 +48,8 @@ class _DetailState extends State<Detail> {
           children: [
             Row(children: [
               Expanded(
-                  // constrain height
                   child: Align(alignment: Alignment.topCenter, child: chart())),
               Expanded(
-// constrain height
                   child: Align(
                       alignment: Alignment.topCenter, child: informationBox())),
             ]),
@@ -65,15 +63,26 @@ class _DetailState extends State<Detail> {
   }
 
   Widget mobileOrientation() {
-    return Column(
-        //child: Text(args.coinSymbol),
-        children: [
-          Expanded(
-              child: Align(alignment: Alignment.topCenter, child: chart())),
-          Expanded(
-              child: Align(
-                  alignment: Alignment.topCenter, child: informationBox())),
-        ]);
+    return SingleChildScrollView(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+          //child: Text(args.coinSymbol),
+          children: [
+            Row(children: [
+              Expanded(
+                  child: Align(alignment: Alignment.topCenter, child: chart())),
+            ]),
+            Row(children: [
+              Expanded(
+                  child: Align(
+                      alignment: Alignment.topCenter, child: informationBox())),
+            ]),
+            Row(children: [
+              Expanded(
+                child: descriptionBoxFuture(),
+              )
+            ]),
+          ]),
+    );
   }
 
   Widget descriptionBoxFuture() {
