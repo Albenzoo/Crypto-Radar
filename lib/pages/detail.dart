@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:projectwallet/api/crypto_api.dart';
 import 'package:projectwallet/components/info_box.dart';
 import 'package:projectwallet/components/line_chart.dart';
@@ -7,6 +8,7 @@ import 'package:projectwallet/models/CoinInfo.dart';
 import 'package:projectwallet/models/CryptoMarket.dart';
 import 'package:projectwallet/models/MarketChartData.dart';
 import 'package:projectwallet/shared/constants.dart';
+import 'dart:js' as js;
 
 class Detail extends StatefulWidget {
   final String coinSymbol;
@@ -103,9 +105,9 @@ class _DetailState extends State<Detail> {
             } else {
               CoinInfo response = snapshot.data!;
               String description = "Non disponibile";
-              if (response.description['it'] != null) {
+              if (response.description['it'] != "") {
                 description = response.description['it'];
-              } else {
+              } else if (response.description['en'] != "") {
                 description = response.description['en'];
               }
               return descriptionBox(description);
@@ -131,13 +133,29 @@ class _DetailState extends State<Detail> {
       ),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(children: [
-          Text("Descrizione", style: TextStyle(fontSize: 25)),
+          Padding(
+            padding: EdgeInsets.only(left: 7),
+            child: Text("Descrizione", style: TextStyle(fontSize: 25)),
+          )
         ]),
         Row(children: [
           Flexible(
             child: Padding(
-              padding: EdgeInsets.only(top: 8),
-              child: Text(description, style: TextStyle(fontSize: 15)),
+              padding: EdgeInsets.only(top: 3),
+              child: Html(
+                data: description,
+                style: {
+                  "body": Style(
+                    fontSize: FontSize(18.0),
+                    fontWeight: FontWeight.normal,
+                  ),
+                },
+                onLinkTap: (url, context, attributes, element) {
+                  print("Opening...");
+                  js.context.callMethod('open', [url]);
+                },
+              ),
+              //child: Text(description, style: TextStyle(fontSize: 15)),
             ),
           ),
         ]),
