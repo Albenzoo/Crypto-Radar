@@ -5,10 +5,9 @@ import 'package:projectwallet/components/info_box.dart';
 import 'package:projectwallet/components/line_chart.dart';
 import 'package:projectwallet/components/my_app_bar.dart';
 import 'package:projectwallet/models/CoinInfo.dart';
-import 'package:projectwallet/models/CryptoMarket.dart';
 import 'package:projectwallet/models/MarketChartData.dart';
 import 'package:projectwallet/shared/constants.dart';
-import 'dart:js' as js;
+import 'package:universal_html/js.dart' as js;
 
 class Detail extends StatefulWidget {
   final String coinSymbol;

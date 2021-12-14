@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:projectwallet/custom_icon/custom_icon.dart';
 import 'package:projectwallet/models/CoinInfo.dart';
 import 'package:projectwallet/shared/constants.dart';
-import 'dart:js' as js;
+import 'package:universal_html/js.dart' as js;
 
 class InfoBox extends StatefulWidget {
   final CoinInfo coinInfo;
