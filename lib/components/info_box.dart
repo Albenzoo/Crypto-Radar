@@ -37,163 +37,328 @@ class _InfoBoxState extends State<InfoBox> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(children: [
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(right: 8, bottom: 10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.shade600,
+                            offset: Offset(2, 2),
+                            blurRadius: 10,
+                            spreadRadius: 2,
+                          )
+                        ]),
+                    height: 50,
+                    width: 50,
+                    child: Padding(
+                      padding: EdgeInsets.all(6),
+                      child: Image.network(coinInfo.image.small),
+                    ),
+                  ),
+                ),
+                Text(coinInfo.name, style: TextStyle(fontSize: 25)),
+              ]),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Padding(
-              padding: EdgeInsets.only(right: 8),
-              child: Image.network(coinInfo.image.small),
-            ),
-            Text(coinInfo.name, style: TextStyle(fontSize: 25)),
-          ]),
-          Row(children: [
-            Padding(
-              padding: EdgeInsets.only(right: 8),
+              padding: EdgeInsets.only(left: 10),
               child: Text("Valore:", style: TextStyle(fontSize: 15)),
             ),
-            Text("${marketData.current_price['eur'].toString()}€",
-                style: TextStyle(fontSize: 15)),
-          ]),
-          Row(children: [
             Padding(
-              padding: EdgeInsets.only(right: 8),
+              padding: EdgeInsets.only(right: 10),
+              child: Text("${marketData.current_price['eur'].toString()}€",
+                  style: TextStyle(fontSize: 15)),
+            ),
+          ]),
+          Divider(
+            color: Colors.grey.shade500,
+            height: 6,
+            indent: 0,
+            endIndent: 0,
+            thickness: 1,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Padding(
+              padding: EdgeInsets.only(left: 10),
               child: Text("Market Cap:", style: TextStyle(fontSize: 15)),
             ),
-            Text("${marketData.marketCap?['eur'].toString()}€",
-                style: TextStyle(fontSize: 15)),
-          ]),
-          Row(children: [
             Padding(
-              padding: EdgeInsets.only(right: 8),
+              padding: EdgeInsets.only(right: 10),
+              child: Text("${marketData.marketCap?['eur'].toString()}€",
+                  style: TextStyle(fontSize: 15)),
+            ),
+          ]),
+          Divider(
+            color: Colors.grey.shade500,
+            height: 6,
+            indent: 0,
+            endIndent: 0,
+            thickness: 1,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Padding(
+              padding: EdgeInsets.only(left: 10),
               child: Text("Market Cap Rank:", style: TextStyle(fontSize: 15)),
             ),
-            Text("#${marketData.marketCapRank.toString()}",
-                style: TextStyle(fontSize: 15)),
-          ]),
-          Row(children: [
             Padding(
-              padding: EdgeInsets.only(right: 8),
+              padding: EdgeInsets.only(right: 10),
+              child: Text("#${marketData.marketCapRank.toString()}",
+                  style: TextStyle(fontSize: 15)),
+            )
+          ]),
+          Divider(
+            color: Colors.grey.shade500,
+            height: 6,
+            indent: 0,
+            endIndent: 0,
+            thickness: 1,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Padding(
+              padding: EdgeInsets.only(left: 10),
               child: Text("All Time High:", style: TextStyle(fontSize: 15)),
             ),
-            Text(
-                "${marketData.ath['eur'].toString()}€ in data ${dateToString(marketData.athDate['eur'])}",
-                style: TextStyle(fontSize: 15)),
-          ]),
-          Row(children: [
             Padding(
-              padding: EdgeInsets.only(right: 8),
+              padding: EdgeInsets.only(right: 10),
+              child: Text(
+                  "${marketData.ath['eur'].toString()}€ nel ${dateToString(marketData.athDate['eur'])}",
+                  style: TextStyle(fontSize: 15)),
+            )
+          ]),
+          Divider(
+            color: Colors.grey.shade500,
+            height: 6,
+            indent: 0,
+            endIndent: 0,
+            thickness: 1,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Padding(
+              padding: EdgeInsets.only(left: 10),
               child: Text("Volume:", style: TextStyle(fontSize: 15)),
             ),
-            Text("${marketData.totalVolume?['eur'].toString()}€",
-                style: TextStyle(fontSize: 15)),
-          ]),
-          Row(children: [
             Padding(
-              padding: EdgeInsets.only(right: 8),
+              padding: EdgeInsets.only(right: 10),
+              child: Text("${marketData.totalVolume?['eur'].toString()}€",
+                  style: TextStyle(fontSize: 15)),
+            )
+          ]),
+          Divider(
+            color: Colors.grey.shade500,
+            height: 6,
+            indent: 0,
+            endIndent: 0,
+            thickness: 1,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Padding(
+              padding: EdgeInsets.only(left: 10),
               child: Text("High 24h:", style: TextStyle(fontSize: 15)),
             ),
-            Text("${marketData.high24H?['eur'].toString()}€",
-                style: TextStyle(fontSize: 15)),
-          ]),
-          Row(children: [
             Padding(
-              padding: EdgeInsets.only(right: 8),
+              padding: EdgeInsets.only(right: 10),
+              child: Text("${marketData.high24H?['eur'].toString()}€",
+                  style: TextStyle(fontSize: 15)),
+            )
+          ]),
+          Divider(
+            color: Colors.grey.shade500,
+            height: 6,
+            indent: 0,
+            endIndent: 0,
+            thickness: 1,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Padding(
+              padding: EdgeInsets.only(left: 10),
               child: Text("Low 24h:", style: TextStyle(fontSize: 15)),
             ),
-            Text("${marketData.low24H?['eur'].toString()}€",
-                style: TextStyle(fontSize: 15)),
-          ]),
-          Row(children: [
             Padding(
-              padding: EdgeInsets.only(right: 8),
+              padding: EdgeInsets.only(right: 10),
+              child: Text("${marketData.low24H?['eur'].toString()}€",
+                  style: TextStyle(fontSize: 15)),
+            )
+          ]),
+          Divider(
+            color: Colors.grey.shade500,
+            height: 6,
+            indent: 0,
+            endIndent: 0,
+            thickness: 1,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Padding(
+              padding: EdgeInsets.only(left: 10),
               child: Text("Variazione prezzo 24h:",
                   style: TextStyle(fontSize: 15)),
             ),
-            Text("${marketData.priceChangePercentage24H?.toStringAsFixed(2)}%",
-                style: TextStyle(fontSize: 15)),
-          ]),
-          Row(children: [
             Padding(
-              padding: EdgeInsets.only(right: 8),
+              padding: EdgeInsets.only(right: 10),
+              child: Text(
+                  "${marketData.priceChangePercentage24H?.toStringAsFixed(2)}%",
+                  style: TextStyle(fontSize: 15)),
+            )
+          ]),
+          Divider(
+            color: Colors.grey.shade500,
+            height: 6,
+            indent: 0,
+            endIndent: 0,
+            thickness: 1,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Padding(
+              padding: EdgeInsets.only(left: 10),
               child: Text("Variazione prezzo 7 giorni:",
                   style: TextStyle(fontSize: 15)),
             ),
-            Text("${marketData.priceChangePercentage7D?.toStringAsFixed(2)}%",
-                style: TextStyle(fontSize: 15)),
-          ]),
-          Row(children: [
             Padding(
-              padding: EdgeInsets.only(right: 8),
+              padding: EdgeInsets.only(right: 10),
+              child: Text(
+                  "${marketData.priceChangePercentage7D?.toStringAsFixed(2)}%",
+                  style: TextStyle(fontSize: 15)),
+            )
+          ]),
+          Divider(
+            color: Colors.grey.shade500,
+            height: 6,
+            indent: 0,
+            endIndent: 0,
+            thickness: 1,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Padding(
+              padding: EdgeInsets.only(left: 10),
               child: Text("Variazione prezzo 30 giorni:",
                   style: TextStyle(fontSize: 15)),
             ),
-            Text("${marketData.priceChangePercentage30D?.toStringAsFixed(2)}%",
-                style: TextStyle(fontSize: 15)),
-          ]),
-          Row(children: [
             Padding(
-              padding: EdgeInsets.only(right: 8),
+              padding: EdgeInsets.only(right: 10),
+              child: Text(
+                  "${marketData.priceChangePercentage30D?.toStringAsFixed(2)}%",
+                  style: TextStyle(fontSize: 15)),
+            )
+          ]),
+          Divider(
+            color: Colors.grey.shade500,
+            height: 6,
+            indent: 0,
+            endIndent: 0,
+            thickness: 1,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Padding(
+              padding: EdgeInsets.only(left: 10),
               child: Text("Variazione prezzo 200 giorni:",
                   style: TextStyle(fontSize: 15)),
             ),
-            Text("${marketData.priceChangePercentage200D?.toStringAsFixed(2)}%",
-                style: TextStyle(fontSize: 15)),
-          ]),
-          Row(children: [
             Padding(
-              padding: EdgeInsets.only(right: 8),
+              padding: EdgeInsets.only(right: 10),
+              child: Text(
+                  "${marketData.priceChangePercentage200D?.toStringAsFixed(2)}%",
+                  style: TextStyle(fontSize: 15)),
+            )
+          ]),
+          Divider(
+            color: Colors.grey.shade500,
+            height: 6,
+            indent: 0,
+            endIndent: 0,
+            thickness: 1,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Padding(
+              padding: EdgeInsets.only(left: 10),
               child: Text("Variazione prezzo 1 anno:",
                   style: TextStyle(fontSize: 15)),
             ),
-            Text("${marketData.priceChangePercentage1Y?.toStringAsFixed(2)}%",
-                style: TextStyle(fontSize: 15)),
-          ]),
-          Row(children: [
             Padding(
-              padding: EdgeInsets.only(right: 8),
+              padding: EdgeInsets.only(right: 10),
+              child: Text(
+                  "${marketData.priceChangePercentage1Y?.toStringAsFixed(2)}%",
+                  style: TextStyle(fontSize: 15)),
+            )
+          ]),
+          Divider(
+            color: Colors.grey.shade500,
+            height: 6,
+            indent: 0,
+            endIndent: 0,
+            thickness: 1,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Padding(
+              padding: EdgeInsets.only(left: 10),
               child:
                   Text("Prezzi aggiornati al:", style: TextStyle(fontSize: 15)),
             ),
-            Text("${dateToString(marketData.lastUpdated)}",
-                style: TextStyle(fontSize: 15)),
+            Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: Text("${dateToString(marketData.lastUpdated)}",
+                  style: TextStyle(fontSize: 15)),
+            )
           ]),
+          Divider(
+            color: Colors.grey.shade500,
+            height: 6,
+            indent: 0,
+            endIndent: 0,
+            thickness: 1,
+          ),
           Padding(
-            padding: EdgeInsets.only(right: 8),
-            child: Row(children: [
-              Text("Link: ", style: TextStyle(fontSize: 15)),
-              MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: GestureDetector(
-                  onTap: () {
-                    print("vai alla homepage");
-                    js.context.callMethod('open', [links?.homepage?[0]]);
-                  }, // handle your image tap here
-                  child: Image.network(coinInfo.image.thumb),
-                ),
-              ),
-              MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: GestureDetector(
-                  onTap: () {
-                    print("vai alla homepage");
-                    js.context.callMethod('open', [links?.subredditUrl]);
-                  }, // handle your image tap here
-                  child: Icon(
-                    CustomIcon.reddit_1,
-                    size: 24.0,
+            padding: EdgeInsets.only(top: 10),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              //Text("Link: ", style: TextStyle(fontSize: 15)),
+              Padding(
+                padding: EdgeInsets.only(right: 11),
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () {
+                      print("vai alla homepage");
+                      js.context.callMethod('open', [links?.homepage?[0]]);
+                    }, // handle your image tap here
+                    child: Image.network(coinInfo.image.thumb),
                   ),
                 ),
               ),
-              MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: GestureDetector(
-                  onTap: () {
-                    print("vai alla homepage");
-                    js.context.callMethod('open', [
-                      'https://www.facebook.com/${links?.facebookUsername}'
-                    ]);
-                  }, // handle your image tap here
-                  child: Icon(
-                    Icons.facebook,
-                    size: 25.0,
+              Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () {
+                      print("vai alla homepage");
+                      js.context.callMethod('open', [links?.subredditUrl]);
+                    }, // handle your image tap here
+                    child: Icon(
+                      CustomIcon.reddit_1,
+                      size: 24.0,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () {
+                      print("vai alla homepage");
+                      js.context.callMethod('open', [
+                        'https://www.facebook.com/${links?.facebookUsername}'
+                      ]);
+                    }, // handle your image tap here
+                    child: Icon(
+                      Icons.facebook,
+                      size: 25.0,
+                    ),
                   ),
                 ),
               ),
