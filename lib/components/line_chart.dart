@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:projectwallet/models/MarketChartData.dart';
 import 'package:intl/intl.dart';
+import 'package:projectwallet/shared/constants.dart';
 
 class LineCryptoChart extends StatefulWidget {
   final MarketChartData chartData;
@@ -72,6 +73,22 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
                 ),
               ),
             )),
+        Align(
+          alignment: Alignment.topCenter,
+          child: Padding(
+            padding:
+                const EdgeInsets.only(right: 0, left: 17, top: 25, bottom: 0),
+            child: Text(
+              'Ultimi 30 giorni',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.white60,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 2,
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
