@@ -12,8 +12,5 @@ nodemon mocks/
 
 Lista:
 
-- fare card info varie pagina dettaglio
-- fare card descrizione pagina dettaglio
 - il refresh del dettaglio sembra non funzionare
-- correggere errore "indietro" dalla home alla login
 - ritoccare dettagli card della home
