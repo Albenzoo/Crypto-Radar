@@ -233,6 +233,7 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
       sum = sum + currentValue;
     }
     double avg = sum / pricesValue.length;
+    avg = double.parse(avg.toStringAsFixed(2));
     return avg;
   }
 
@@ -252,7 +253,7 @@ class _LineCryptoChartState extends State<LineCryptoChart> {
 
     List<String> stringDate = dateToString(timestampList);
     return LineChartData(
-      lineTouchData: LineTouchData(enabled: false),
+      lineTouchData: LineTouchData(enabled: true),
       gridData: FlGridData(
         show: true,
         drawHorizontalLine: true,

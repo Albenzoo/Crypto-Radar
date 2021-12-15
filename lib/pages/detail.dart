@@ -219,6 +219,5 @@ class _DetailState extends State<Detail> {
       '/home/detail',
       arguments: {"coinSymbol": widget.coinSymbol, "coinName": widget.coinName},
     );
-    //setState(() {});
   }
 }
