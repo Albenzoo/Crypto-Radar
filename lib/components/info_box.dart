@@ -29,7 +29,7 @@ class _InfoBoxState extends State<InfoBox> {
         borderRadius: BorderRadius.circular(18),
         boxShadow: [
           new BoxShadow(
-            color: kPrimaryColor,
+            color: detailBoxColor,
             offset: new Offset(6.0, 6.0),
           ),
         ],

@@ -12,13 +12,13 @@ Widget cryptoCard(BuildContext myContext, CryptoMarket crypto) {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Colors.deepPurple.shade100,
-              Colors.deepPurpleAccent.shade100
+              Colors.deepPurple.withOpacity(0.4),
+              Colors.deepPurpleAccent.withOpacity(0.2)
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          color: Colors.blue,
+          //color: Colors.blue,
           //color: kPrimaryColor,
         ),
         padding: EdgeInsets.all(12),
