@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
   Future navigateToDetailPage(String symbol, String name) async {
     // Pushing a named route
     Navigator.of(context).pushNamed(
-      '/detail',
+      '/home/detail',
       arguments: {"coinSymbol": symbol, "coinName": name.toLowerCase()},
     );
   }

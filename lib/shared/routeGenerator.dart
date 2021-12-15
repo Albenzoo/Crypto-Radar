@@ -12,10 +12,11 @@ class RouteGenerator {
         // Validation of correct data type
         return MaterialPageRoute(
           builder: (_) => Home(),
+          settings: settings,
         );
       // If args is not of the correct type, return an error page.
       // You can also throw an exception while in development.
-      case '/detail':
+      case '/home/detail':
         // Getting arguments passed in while calling Navigator.pushNamed
         final args = settings.arguments as Map<String, String>;
 
@@ -28,6 +29,7 @@ class RouteGenerator {
               coinSymbol: args["coinSymbol"]!,
               coinName: args["coinName"]!,
             ),
+            settings: settings,
           );
         }
         // If args is not of the correct type, return an error page.
