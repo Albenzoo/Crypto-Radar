@@ -214,6 +214,11 @@ class _DetailState extends State<Detail> {
   /* Refresh page */
   void refresh() {
     print("Refresh");
-    setState(() {});
+    Navigator.pop(context);
+    Navigator.of(context).pushNamed(
+      '/home/detail',
+      arguments: {"coinSymbol": widget.coinSymbol, "coinName": widget.coinName},
+    );
+    //setState(() {});
   }
 }
