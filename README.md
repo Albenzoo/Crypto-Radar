@@ -10,7 +10,5 @@ Per aggiornare la pagina cliccare "r" sul terminale
 Per avviare il mock:
 nodemon mocks/
 
-Lista:
+Lista TODO:
 
-- il refresh del dettaglio sembra non funzionare
-- ritoccare dettagli card della home
