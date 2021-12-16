@@ -3,6 +3,7 @@ import 'package:projectwallet/models/CryptoMarket.dart';
 import 'package:projectwallet/shared/constants.dart';
 
 Widget cryptoCard(BuildContext myContext, CryptoMarket crypto) {
+  Size size = MediaQuery.of(myContext).size;
   return Card(
     shadowColor: kPrimaryColor,
     elevation: 8,
@@ -57,7 +58,13 @@ Widget cryptoCard(BuildContext myContext, CryptoMarket crypto) {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(crypto.name, style: TextStyle(fontSize: 18)),
+                        Text(
+                            size.width > 700
+                                ? (crypto.name.length > 14
+                                    ? crypto.name.substring(0, 14)
+                                    : crypto.name)
+                                : crypto.name,
+                            style: TextStyle(fontSize: 18)),
                         Padding(
                             padding: const EdgeInsets.only(right: 6),
                             child: Text(
