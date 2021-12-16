@@ -83,7 +83,7 @@ class _RootPageState extends State<RootPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Controlla le tue crypto!",
+                    "Controlla le tue crypto preferite!",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 28,
@@ -91,7 +91,7 @@ class _RootPageState extends State<RootPage> {
                     ),
                   ),
                   Text(
-                    "Inserisci i dati e visualizza le statistiche",
+                    "Visualizza dati e statistiche",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,
