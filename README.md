@@ -1,6 +1,12 @@
 # Crypto-Radar
 
-Flutter web application that allows users to view the current values of cryptocurrencies. Users can view a list of cryptocurrencies, with the current value of each, and select one to view more information. Specifically, users can view a description of the selected cryptocurrency and a chart that shows the value of the cryptocurrency over time.
+Flutter-web based tool for monitoring and analyzing cryptocurrency prices and market data.
+With Crypto-Radar, you can easily track the latest prices, trading volumes, and market trends for a wide range of cryptocurrencies,
+including Bitcoin, Ethereum, Litecoin, and many others.
+The tool provides a user-friendly interface for viewing charts and graphs that display historical and current market data,
+and it also allows you to see the description and the main infos of every cryptocurrencies supported.
+Crypto-Radar uses APIs from coinGecko to ensure accurate and up-to-date information. Whether you're a seasoned cryptocurrency trader or
+just getting started in the world of digital assets, Crypto-Radar is a tool that can help you stay updated with the latest market developments.
 
 The application is based on Flutter Web, an open-source framework for developing mobile and web apps, using the Dart programming language.
 
